@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-use App\Models\User;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+use DB;
+
+
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +18,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        
-        $user = User::paginate(10);
-       
-        return view ('users.index',[
-            'user' => $user
+        $book = Book::orderBy('id', 'desc')->paginate(10);
+    
+        return view ('books.index',[
+            'book' => $book
     ]);
     }
 
@@ -30,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('books.create');
     }
 
     /**
@@ -39,15 +41,27 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
+       
+        $date_start = $request->input('date_start');
+        $hours_start = $request->input('hours_start');
+        $minutes_start = $request->input('minutes_start');
+        $date_end = $request->input('date_end');
+        $hours_end = $request->input('hours_end');
+        $minutes_end = $request->input('minutes_end');
         
-        $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
+        #konvert ke unix
+        $start = strtotime((string) $date_start." ".$hours_start.":".$minutes_start);
+        $end = strtotime((string) $date_end." ".$hours_end.":".$minutes_end);
         
-        User::create($data);
+        $data['start']=$start;
+        $data['end']=$end;
+        // dd($data);
+        Book::create($data);
 
-        return redirect()->route('users.index');
+        return redirect()->route('books.index');
     }
 
     /**
@@ -67,10 +81,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Book $book)
     {
-        return view('users.edit',[
-            'item' => $user
+        return view('books.edit',[
+            'item' => $book
         ]);
     }
 
@@ -81,18 +95,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-
-        if($request->file('profile_photo_path'))
-        {
-            $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
-        }
-
-        $user->update($data);
-
-        return redirect()->route('users.index');
+        //
     }
 
     /**
@@ -101,10 +106,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Book $book)
     {
-        $user->delete();
+        $book->delete();
 
-        return redirect()->route('users.index');
+        return redirect()->route('books.index');
     }
 }

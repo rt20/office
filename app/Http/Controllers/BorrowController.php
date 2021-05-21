@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
-use App\Models\User;
+use App\Models\Borrow;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class BorrowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        
-        $user = User::paginate(10);
-       
-        return view ('users.index',[
-            'user' => $user
-    ]);
+        $borrow = Borrow::paginate(10);
+
+        return view('borrows.index', [
+            'borrow' => $borrow
+        ]);
     }
 
     /**
@@ -30,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('borrows.create');
     }
 
     /**
@@ -39,15 +37,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
         
-        $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
-        
-        User::create($data);
+        Borrow::create($data);
 
-        return redirect()->route('users.index');
+        return redirect()->route('borrows.index');
     }
 
     /**
@@ -67,10 +63,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Borrow $borrow)
     {
-        return view('users.edit',[
-            'item' => $user
+        return view('borrows.edit',[
+            'item' => $borrow
         ]);
     }
 
@@ -81,18 +77,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Borrow $borrow)
     {
         $data = $request->all();
 
-        if($request->file('profile_photo_path'))
-        {
-            $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
-        }
+        $borrow->update($data);
 
-        $user->update($data);
-
-        return redirect()->route('users.index');
+        return redirect()->route('borrows.index');
     }
 
     /**
@@ -101,10 +92,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Borrow $borrow)
     {
-        $user->delete();
+        $borrow->delete();
 
-        return redirect()->route('users.index');
+        return redirect()->route('borrows.index');
     }
 }

@@ -1,11 +1,11 @@
 <!-- jQuery -->
-<script src="../../dist/plugins/jquery/jquery.min.js"></script>
+<script src="{{ asset('dist/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
-<script src="../../dist/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('dist/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="{{ asset('dist/js/demo.js') }}"></script>
 
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}" defer></script>
