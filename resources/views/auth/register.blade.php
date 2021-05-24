@@ -1,3 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        @include('includes.meta')
+
+        <title>@yield('title') | e-Office</title>
+ 
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" href="">
+        <link rel="shortcut icon" type="image/x-icon" href="">
+       
+       @stack('before-style')
+       <!-- style -->
+       @include('includes.style')
+       @stack('after-style')
+
+    </head>
+    <body>
+    <!-- Site wrapper -->
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+           
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Messages Dropdown Menu -->
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- </div> -->
+    <!-- ./wrapper -->
+
+    @include('home.sidebar')
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -16,7 +61,7 @@
 
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-jet-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required />
             </div>
 
             <div class="mt-4">
@@ -58,3 +103,12 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+@include('includes.footer')
+
+@stack('before-script')
+<!-- script -->
+@include('includes.script')
+@stack('after-script')
+
+</body>
+</html>

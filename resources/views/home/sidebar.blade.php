@@ -62,6 +62,17 @@
                       <!-- /.info-box-content -->
                   </div>
                   </a>
+                  <a href="/register" title="Pendaftaran Akun e-Office">
+                  <div class="info-box bg-warning">
+                      <span class="info-box-icon"><i class="fa fa-registered"></i></span>
+
+                      <div class="info-box-content">
+                          <span class="info-box-text">DAFTAR</span>
+
+                      </div>
+                      <!-- /.info-box-content -->
+                  </div>
+                  </a>
           </nav>
           <!-- /.sidebar-menu -->
       </div>
