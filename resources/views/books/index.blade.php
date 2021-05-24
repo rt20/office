@@ -53,7 +53,7 @@
                                 <td >{{ ($book->currentPage()-1) * $book->perPage()+$loop->index+1 }}</td>
                                 <td >{{ date('d F Y', $item->start)}}</td>
                                 <td >{{ date('d F Y', $item->end) }}</td>
-                                <td >{{ $item->agenda }}</td>
+                                <td ><a href="{{ $item->link }}" target="_blank">{{ $item->agenda }}</a> </td>
                                 <td >{{ $item->room }}</td>
                                 <td >{{ date('H:i', $item->start) }}</td>
                                 <td >{{ date('H:i', $item->end) }}</td>
