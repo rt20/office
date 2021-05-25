@@ -26,7 +26,7 @@
               </p>
             </a>
           </li>
-          @if(Auth::user()->roles == '["ADMIN"]')
+          @if(Auth::user()->roles == 'ADMIN')
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
