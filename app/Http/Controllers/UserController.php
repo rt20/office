@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,8 +44,10 @@ class UserController extends Controller
     {
         $data = $request->all();
         
-        $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
+        // $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
         
+        $data['password']= bcrypt($request->input('password'));
+
         User::create($data);
 
         return redirect()->route('users.index');
@@ -90,6 +93,8 @@ class UserController extends Controller
             $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
         }
 
+        $data['password']= bcrypt($request->input('password'));
+        
         $user->update($data);
 
         return redirect()->route('users.index');

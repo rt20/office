@@ -26,3 +26,5 @@ Route::prefix('dashboard')
         Route::resource('books', BookController::class);
         Route::resource('borrows', BorrowController::class);
     });
+
+  
