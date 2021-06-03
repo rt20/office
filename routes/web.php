@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,6 +26,10 @@ Route::prefix('dashboard')
         Route::resource('users', UserController::class);
         Route::resource('books', BookController::class);
         Route::resource('borrows', BorrowController::class);
+        Route::resource('items', ItemController::class);
+
+        // Route::post('item/import', 'ItemController@import')->name('item.import');  
+        Route::post('item/import', [ItemController::class,'import'])->name('item.import');  
     });
 
   

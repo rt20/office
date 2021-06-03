@@ -46,9 +46,10 @@
                         </div>
                     </div>
                     @endif
-                    <form class="w-full" action="{{ route('books.store') }}" method="post"
+                    <form class="w-full" action="{{ route('books.update',$item->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-sm-2">
                                 Nama PIC*
