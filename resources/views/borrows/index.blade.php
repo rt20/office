@@ -25,7 +25,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="py-12">
+      <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
                 <a href="{{ route('borrows.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
@@ -46,19 +46,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @forelse($borrow as $item)
+                        @forelse($borrow as $a)
                             <tr>
                                 <td class="border px-6 py-4">{{ ($borrow->currentPage()-1) * $borrow->perPage()+$loop->index+1 }}</td>
-                                <td class="border px-6 py-4 ">{{ $item->borrower }}</td>
-                                <td class="border px-6 py-4">{{ $item->item }}</td>
-                                <td class="border px-6 py-4">{{ $item->merk }}</td>
-                                <td class="border px-6 py-4">{{ date('d F y', strtotime($item->start)) }}</td>
-                                <td class="border px-6 py-4">{{ date('d F y', strtotime($item->end)) }}</td>
+                                <td class="border px-6 py-4 ">{{ $a->borrower }}</td>
+                                <td class="border px-6 py-4">{{ $a->item->item }}</td>
+                                <td class="border px-6 py-4">{{ $a->item->merk }}</td>
+                                <td class="border px-6 py-4">{{ date('d F y', strtotime($a->start)) }}</td>
+                                <td class="border px-6 py-4">{{ date('d F y', strtotime($a->end)) }}</td>
                                 <td class="border px-6 py- text-center">
-                                    <a href="{{ route('borrows.edit', $item->id) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
+                                    <a href="{{ route('borrows.edit', $a->id) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
                                         Edit
                                     </a>
-                                    <form action="{{ route('borrows.destroy', $item->id) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('borrows.destroy', $a->id) }}" method="POST" class="inline-block">
                                         {!! method_field('delete') . csrf_field() !!}
                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded inline-block" onclick="return confirm('Apakah anda yakin ?')">
                                             Delete

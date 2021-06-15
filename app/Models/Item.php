@@ -13,4 +13,9 @@ class Item extends Model
         'code', 'item', 'tahun_perolehan', 'nup',  'merk','kondisi'
         
     ];
+
+    public function borrow()
+	{
+		return $this->hasMany(Borrow::class, 'item_id');
+	}
 }

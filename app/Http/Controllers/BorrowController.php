@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Borrow;
+use App\Models\Item;
+
 use Illuminate\Http\Request;
 
 class BorrowController extends Controller
@@ -15,9 +17,11 @@ class BorrowController extends Controller
     public function index()
     {
         $borrow = Borrow::paginate(10);
-
+        $items = Item::paginate(10);
+        
         return view('borrows.index', [
-            'borrow' => $borrow
+            'borrow' => $borrow,
+            'items' => $items
         ]);
     }
 
@@ -28,7 +32,11 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        return view('borrows.create');
+        $items = Item::all();
+      
+        return view('borrows.create', [
+            'items' => $items
+        ]);
     }
 
     /**
@@ -98,4 +106,6 @@ class BorrowController extends Controller
 
         return redirect()->route('borrows.index');
     }
+
+
 }

@@ -11,8 +11,13 @@ class Borrow extends Model
     use HasFactory, softDeletes;
 
     protected $fillable = [
-        'borrower', 'item', 'merk','code', 'agenda','start', 'end'
+        'borrower', 'item_id', 'is_agree','code', 'agenda','start', 'end'
         
     ];
+
+    public function item()
+	{
+		return $this->belongsTo(Item::class, 'item_id');
+	}
 
 }

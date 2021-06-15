@@ -13,7 +13,7 @@
        <!-- style -->
        @include('includes.style')
        @stack('after-style')
-
+      
     </head>
     <body>
 

@@ -28,10 +28,10 @@
     <section class="content">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
+                
                 <div>
                     @if ($errors->any())
-                    <div class="mb-5" role="alert">
+                    <div class="mb-5" role="alert" id="error_container">
                         <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
                             There's something wrong!
                         </div>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     @endif
-                    <form class="w-full" action="{{ route('borrows.store') }}" method="post"
+                    <form class="w-full" action="{{ route('borrows.store') }}" method="post" id="my_form"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -56,7 +56,7 @@
                             <div class="col-sm-9">
                                 <input value="{{ old('borrower') }}" name="borrower"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Nama Peminjam">
+                                    id="borrower" type="text" placeholder="Nama Peminjam" required>
                             </div><br>
                         </div>
                         </br>
@@ -66,20 +66,28 @@
                                 Nama Barang*
                             </div>
                             <div class="col-sm-9">
-                                <input value="{{ old('item') }}" name="item"
+                                <select name="item_id" id="select2"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Nama Barang">
+                                    required>
+                                    <option value=""></option>
+                                    @foreach($items ?? '' as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ old('item_id') == $item->id ? 'selected' : null }}>
+                                        {{ $item->code }}.{{ $item->nup }} | {{ $item->item }} | {{ $item->merk }}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div><br>
                         </div>
                         </br>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-2">
                                 Merk
                             </div>
                             <div class="col-sm-3">
                                 <input value="{{ old('merk') }}" name="merk"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Merk">
+                                    id="merk" type="text" placeholder="Merk">
                             </div></br>
                             <div class="col-sm-1">
 
@@ -90,18 +98,18 @@
                             <div class="col-sm-3">
                                 <input value="{{ old('code') }}" name="code"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Kode BMN">
+                                    id="code" type="text" placeholder="Kode BMN">
                             </div>
                         </div>
-                        <br>
+                        <br> -->
                         <div class="row">
                             <div class="col-sm-2">
                                 Tanggal Mulai*
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" name="start"
+                                <input type="date" name="start" id="start"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('start')}}">
+                                    style="width: 100%;" value="{{old('start')}}" required>
                             </div>
                             <div class="col-sm-1">
 
@@ -110,7 +118,7 @@
                                 Tanggal Selesai
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" name="end"
+                                <input type="date" name="end" id="end"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     style="width: 100%;" value="{{old('end')}}">
                             </div>
@@ -123,10 +131,58 @@
                             <div class="col-sm-9">
                                 <input value="{{ old('agenda') }}" name="agenda"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Agenda">
+                                    id="agenda" type="text" placeholder="Agenda" required>
                             </div></br>
                         </div>
+                        <br>
                         <div class="row">
+                            <div class="col-sm-2">
+                            </div>
+
+                            <div class="col-sm-5">
+                                <input type="checkbox" name="is_agree" value="1" required>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-light" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
+                                    Syarat dan Ketentuan
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Syarat dan Ketentuan
+                                                    Peminjaman Barang</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Peminjam yang menerima Barang Milik Negara tersebut <b> bertanggungjawab
+                                                    atas kehilangan dan kerusakan </b> karena kelalaian pribadi Barang
+                                                Milik Negara
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            </br>
+                            <br></br>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                            </div>
                             <div class="flex flex-wrap -mx-3 mb-6">
                                 <div class="w-full px-3 text-right">
                                     <button type="submit"
@@ -144,5 +200,8 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
+
 
 @endsection

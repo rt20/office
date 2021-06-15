@@ -38,7 +38,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-users nav-icon"></i>
                   <p>User</p>
                 </a>
               </li>
@@ -46,7 +46,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('items.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-archive nav-icon"></i>
                   <p>BMN</p>
                 </a>
               </li>

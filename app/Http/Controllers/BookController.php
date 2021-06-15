@@ -44,6 +44,8 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        $a = $request->room;
        
         $date_start = $request->input('date_start');
         $hours_start = $request->input('hours_start');
@@ -58,8 +60,27 @@ class BookController extends Controller
         
         $data['start']=$start;
         $data['end']=$end;
-        // dd($data);
-        Book::create($data);
+        
+        // $book = Book::where('room',$request->room);
+
+        $book = DB::table('books')
+                ->where('room', $request->room)
+                ->select('books.start','books.end')
+                ->get();
+                $stugas = Book::all();   
+                dd($stugas);
+                $mulai = $stugas->start;
+                dd($mulai); 
+        $mulai = $book->start;
+        dd($mulai);
+        // cara cek jadwal apakah masih available?
+        if ($start < $book->start and $end > $book->end){
+            Book::create($data);
+        }
+        else{
+            
+        }
+        
 
         return redirect()->route('books.index');
     }

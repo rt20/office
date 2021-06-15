@@ -17,4 +17,7 @@
 <!-- Fonts -->
          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
+<!-- select2 -->
+<link rel="stylesheet" href="{{ asset('dist/plugins/select2/css/select2.min.css') }}">
+
 

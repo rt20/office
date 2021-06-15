@@ -123,18 +123,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($borrow as $item)
+                                        @forelse($borrow as $p)
                                         <tr>
                                             <td >
                                                 {{ ($borrow->currentPage()-1) * $borrow->perPage()+$loop->index+1 }}
                                             </td>
-                                            <td ">{{ $item->borrower }}</td>
-                                            <td >{{ $item->item }}</td>
-                                            <td >{{ $item->merk }}</td>
-                                            <td >{{ date('d F y', strtotime($item->start)) }}
+                                            <td ">{{ $p->borrower }}</td>
+                                            <td >{{ $p->item->item }}</td>
+                                            <td >{{ $p->item->merk }}</td>
+                                            <td >{{ date('d F y', strtotime($p->start)) }}
                                             </td>
-                                            <td >{{ date('d F y', strtotime($item->end)) }}</td>
-                                            <td >{{ $item->agenda }}</td>
+                                            <td >{{ date('d F y', strtotime($p->end)) }}</td>
+                                            <td >{{ $p->agenda }}</td>
                                             <td><span class="badge badge-danger">Dipinjam</span></td>
                                         </tr>
                                         @empty
