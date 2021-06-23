@@ -82,29 +82,29 @@
 
 
             <!-- fix for small devices only -->
-           
-        <!-- /.row -->
+
+            <!-- /.row -->
 
 
 
-        <!-- Main row -->
-        <div class="row">
-            <!-- Left col -->
-            <!-- <div class="col-md-8"> -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <!-- <div class="col-md-8"> -->
 
 
 
-            <!-- TABLE: LATEST BOOKING -->
-            <div class="card">
-                <div class="card-header border-transparent">
-                    <h3 class="card-title">Peminjaman Barang</h3>
+                <!-- TABLE: LATEST BOOKING -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                        <h3 class="card-title">Peminjaman Barang</h3>
 
 
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-sm"">
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-sm"">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -124,13 +124,23 @@
                                         {{ ($borrow->currentPage()-1) * $borrow->perPage()+$loop->index+1 }}
                                     </td>
                                     <td ">{{ $p->borrower }}</td>
-                                            <td >{{ $p->item->item }}</td>
-                                            <td >{{ $p->item->merk }}</td>
-                                            <td >{{ date('d F y', strtotime($p->start)) }}
-                                            </td>
-                                            <td >{{ date('d F y', strtotime($p->end)) }}</td>
-                                            <td >{{ $p->agenda }}</td>
-                                            <td><span class=" badge badge-danger">{{ $p->status }}</span></td>
+                                <td>{{ $p->item->item }}</td>
+                                <td>{{ $p->item->merk }}</td>
+                                <td>{{ date('d F y', strtotime($p->start)) }}
+                                </td>
+                                <td>{{ date('d F y', strtotime($p->end)) }}</td>
+                                <td>{{ $p->agenda }}</td>
+                                <td>
+                                    @if($p->status == 'DIPINJAM')
+                                    <span class="badge badge-danger">
+                                        @elseif($p->status == 'KEMBALI')
+                                        <span class="badge badge-success">
+                                            @else
+                                            <span>
+                                                @endif
+                                                {{ $p->status }}
+                                            </span>
+                                </td>
                                 </tr>
                                 @empty
                                 <tr>
@@ -139,27 +149,27 @@
                                     </td>
                                 </tr>
                                 @endforelse
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
                     </div>
-                    <!-- /.table-responsive -->
+                    <!-- /.card-body -->
+
+                    <!-- /.card-footer -->
                 </div>
-                <!-- /.card-body -->
+                <!-- /.card -->
+                <!-- </div> -->
+                <!-- /.col -->
 
-                <!-- /.card-footer -->
+
+                <!-- /.col -->
             </div>
-            <!-- /.card -->
-            <!-- </div> -->
-            <!-- /.col -->
-
-
-            <!-- /.col -->
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
-</div>
-<!--/. container-fluid -->
-</section>
-<!-- /.content -->
+        <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 

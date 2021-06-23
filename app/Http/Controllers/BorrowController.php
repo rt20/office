@@ -14,11 +14,12 @@ class BorrowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $borrow = Borrow::paginate(10);
         $items = Item::paginate(10);
+        $borrow = Borrow::orderBy('start', 'desc')->get();
         
+
         return view('borrows.index', [
             'borrow' => $borrow,
             'items' => $items
@@ -37,7 +38,7 @@ class BorrowController extends Controller
         return view('borrows.create', [
             'items' => $items
         ]);
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.
@@ -106,6 +107,18 @@ class BorrowController extends Controller
 
         return redirect()->route('borrows.index');
     }
+    public function setStatus (Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:DIPINJAM,KEMBALI'
+        ]);
 
+        $item = Borrow::findOrFail($id);
+        $item->status = $request->status;
+
+        $item->save();
+       
+        return redirect()->route('borrows.index');
+    }
 
 }

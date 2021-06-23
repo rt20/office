@@ -2,92 +2,127 @@
 
 @section('title','Peminjaman Barang')
 
-@section('content')   
+@section('content')
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Data Peminjaman Barang</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item active">Peminjaman Barang</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Data Peminjaman Barang</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">Peminjaman Barang</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="py-1">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-10">
-                <a href="{{ route('borrows.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                    + Pinjam Barang
-                </a>
+        <div class="card">
+            <div class="card-body">
+                <div class="row input-daterange">
+                    <!-- <div class="col-sm-2">
+                        <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date"
+                            readonly />
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date"
+                            readonly />
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" name="filter" id="filter" class="btn btn-primary">Filter</button>
+                        <button type="button" name="refresh" id="refresh" class="btn btn-info">Refresh</button>
+                    </div> -->
+                    <div class="col-sm-auto">
+                        <a href="{{ route('borrows.create') }}"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-3 rounded float-right">
+                            + Pinjam Barang
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white" style="overflow-x:auto;">
-                <table class="table-auto w-full" >
-                    <thead>
-                    <tr>
-                        <th class="border px-6 py-4">No</th>
-                        <th class="border px-6 py-4">Peminjam</th>
-                        <th class="border px-6 py-4">Nama Barang</th>
-                        <th class="border px-6 py-4">Merk</th>
-                        <th class="border px-6 py-4">Mulai</th>
-                        <th class="border px-6 py-4">Selesai</th>
-                        <th class="border px-6 py-4">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($borrow as $a)
+            <!-- AKHIR DATE RANGE PICKER -->
+            <div class="card-body">
+                <div class="card-body table-responsive p-0" style="overflow-x:auto;">
+                    <table id="example" class="table table-striped table-bordered table-sm">
+                        <thead>
                             <tr>
-                                <td class="border px-6 py-4">{{ ($borrow->currentPage()-1) * $borrow->perPage()+$loop->index+1 }}</td>
-                                <td class="border px-6 py-4 ">{{ $a->borrower }}</td>
-                                <td class="border px-6 py-4">{{ $a->item->item }}</td>
-                                <td class="border px-6 py-4">{{ $a->item->merk }}</td>
-                                <td class="border px-6 py-4">{{ date('d F y', strtotime($a->start)) }}</td>
-                                <td class="border px-6 py-4">{{ date('d F y', strtotime($a->end)) }}</td>
-                                <td class="border px-6 py- text-center">
-                                    <a href="{{ route('borrows.edit', $a->id) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('borrows.destroy', $a->id) }}" method="POST" class="inline-block">
-                                        {!! method_field('delete') . csrf_field() !!}
-                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded inline-block" onclick="return confirm('Apakah anda yakin ?')">
-                                            Delete
-                                        </button>
-                                    </form>
+
+                                <th>Peminjam</th>
+                                <th>Nama Barang</th>
+                                <th>Merk</th>
+                                <th>Agenda</th>
+                                <th>Mulai</th>
+                                <th>Selesai</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($borrow as $a)
+                            <tr>
+
+                                <td>{{ $a->borrower }}</td>
+                                <td>{{ $a->item->item }}</td>
+                                <td>{{ $a->item->merk }}</td>
+                                <td>{{ $a->agenda }}</td>
+                                <td>{{ date('d M y', strtotime($a->start)) }}</td>
+                                <td>{{ date('d M y', strtotime($a->end)) }}</td>
+                                <td>
+                                    @if($a->status == 'DIPINJAM')
+                                    <span class="badge badge-danger">
+                                        @elseif($a->status == 'KEMBALI')
+                                        <span class="badge badge-success">
+                                            @else
+                                            <span>
+                                                @endif
+                                                {{($a->status)}}
+                                            </span>
+                                </td>
+                                <td align="right">
+                                    
+                                            @if($a->status == 'DIPINJAM')
+                                            <a href="{{ route('borrow.status', $a->id ) }}?status=KEMBALI"
+                                                class="btn btn-success btn-sm">
+                                                <i class="fa fa-check"></i>
+                                            </a>
+                                            @endif
+                                        
+                                            <form action="{{ route('borrows.destroy', $a->id) }}" method="post"
+                                                class="d-inline" title="Hapus">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-sm "
+                                                    onclick="return confirm('Apakah anda yakin ?')">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                       
                                 </td>
                             </tr>
-                        @empty
+                            @empty
                             <tr>
-                               <td colspan="7" class="border text-center p-5">
-                                   Data Tidak Ditemukan
-                               </td>
+                                <td colspan="7" class="border text-center p-5">
+                                    Data Tidak Ditemukan
+                                </td>
                             </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            <div class="text-center mt-5">
-                {{ $borrow->links() }}
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    
-
-
-
-      </div><!--/. container-fluid -->
+        <!--/. container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+</div>
+<!-- /.content-wrapper -->
 
 @endsection

@@ -22,7 +22,7 @@ class BookController extends Controller
         if($request->ajax()){           
             //Jika request from_date ada value(datanya) maka
             if(!empty($request->from_date))
-            {
+            { 
                 //Jika tanggal awal(from_date) hingga tanggal akhir(to_date) adalah sama maka
                 if($request->from_date === $request->to_date){
                     //kita filter tanggalnya sesuai dengan request from_date
@@ -40,9 +40,9 @@ class BookController extends Controller
             }
             return datatables()->of($book)
                         ->addColumn('action', function($data){
-                            $button = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
+                            $button = '<a href=" ./books/'.$data->id.'/edit" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
                             $button .= '&nbsp;&nbsp;';
-                            $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';     
+                            $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>';     
                             return $button;
                         })
                         ->rawColumns(['action'])
@@ -167,4 +167,6 @@ class BookController extends Controller
 
         return redirect()->route('books.index');
     }
+
+    
 }

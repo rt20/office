@@ -29,6 +29,9 @@
 <script type="text/javascript" language="javascript"
     src="{{ asset('dist/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 
+<!-- notif kecil dibawah -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
+        integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
 <script>
     //CSRF TOKEN PADA HEADER
     //Script ini wajib krn kita butuh csrf token setiap kali mengirim request post, patch, put dan delete ke server
@@ -85,8 +88,8 @@
                 processing: true,
                 serverSide: true, //aktifkan server-side 
                 ajax: {
-                    url: "{{ route('books.index') }}",
-                    // url: "https://jadwal.balok.id/schedules", 
+                    // url: "{{ route('books.index') }}",
+                    url: "https://office.balok.id/dashboard/books", 
                     type: 'GET',
                     data: {
                         from_date: from_date,
@@ -128,23 +131,10 @@
                         data: 'pic',
                         name: 'pic'
                     },
-                    // {
-                    //     data: 'action',
-                    //     name: 'action'
-                    // },
                     {
-                        data: 'id',
-                        name: 'id',
-                        render: function (data, type, row, meta) {
-                            return '<a href=" ./books/' + data + '/edit">Edit</a>';
-                        }
+                        data: 'action',
+                        name: 'action'
                     },
-                    // {
-                    //     data: id,
-                    //     className: "dt-center editor-delete",
-                    //     defaultContent: '<i class="fa fa-trash"/>',
-                    //     orderable: false
-                    // },
                 ],
                 order: [
                     [0, 'desc']
@@ -153,16 +143,33 @@
         }
     });
 
+    //jika klik class delete (yang ada pada tombol delete) maka tampilkan modal konfirmasi hapus maka
+    $(document).on('click', '.delete', function () {
+        dataId = $(this).attr('id');
+        $('#konfirmasi-modal').modal('show');
+    });
 
-    // Delete a record
-    $('#booking').on('click', 'td.editor-delete', function (e) {
-        e.preventDefault();
-
-        editor.remove($(this).closest('tr'), {
-            title: 'Delete record',
-            message: 'Are you sure you wish to remove this record?',
-            buttons: 'Delete'
-        });
+    //jika tombol hapus pada modal konfirmasi di klik maka
+    $('#tombol-hapus').click(function () {
+        $.ajax({
+            url: "books/" + dataId, //eksekusi ajax ke url ini
+            type: 'DELETE',
+            beforeSend: function () {
+                $('#tombol-hapus').text('Hapus'); //set text untuk tombol hapus
+            },
+            success: function (data) { //jika sukses
+                setTimeout(function () {
+                    $('#konfirmasi-modal').modal('hide'); //sembunyikan konfirmasi modal
+                    var oTable = $('#booking').dataTable();
+                    oTable.fnDraw(false); //reset datatable
+                });
+                iziToast.warning({ //tampilkan izitoast warning
+                    title: 'Data Berhasil Dihapus',
+                    message: '{{ Session('delete ')}}',
+                    position: 'bottomRight'
+                });
+            }
+        })
     });
 </script>
 
