@@ -54,8 +54,17 @@
           </li>
           @endif
           <li class="nav-item has-treeview">
+            <a href="{{ route('books.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Booking Ruangan
+              </p>
+            </a>
+          </li>
+          
+          <li class="nav-item has-treeview">
             <a href="{{ route('borrows.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-laptop"></i>
               <p>
                 Peminjaman Barang
               </p>
@@ -63,14 +72,13 @@
            
           </li>
           <li class="nav-item has-treeview">
-            <a href="{{ route('books.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+            <a href="{{ route('schedules.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-calendar"></i>
               <p>
-                Booking Ruangan
+                Jadwal Kegiatan
               </p>
             </a>
           </li>
-
           
       </nav>
       <!-- /.sidebar-menu -->

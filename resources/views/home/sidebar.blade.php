@@ -45,7 +45,7 @@
                       <span class="info-box-icon"><i class="fab fa-mixcloud"></i></span>
 
                       <div class="info-box-content">
-                          <span class="info-box-text">CLOUD DATA</span>
+                          <span class="info-box-text">WEEBLY</span>
 
                       </div>
                       <!-- /.info-box-content -->

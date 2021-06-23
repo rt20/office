@@ -16,13 +16,41 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $book = Book::orderBy('id', 'desc')->paginate(10);
-    
-        return view ('books.index',[
-            'book' => $book
-    ]);
+
+        if($request->ajax()){           
+            //Jika request from_date ada value(datanya) maka
+            if(!empty($request->from_date))
+            {
+                //Jika tanggal awal(from_date) hingga tanggal akhir(to_date) adalah sama maka
+                if($request->from_date === $request->to_date){
+                    //kita filter tanggalnya sesuai dengan request from_date
+                    $book = Book::whereDate('date_start','=', $request->from_date)->get();
+                }
+                else{
+                    //kita filter dari tanggal awal ke akhir
+                    $book = Book::whereBetween('date_start', array($request->from_date, $request->to_date))->get();
+                }                
+            }
+            //load data default
+            else
+            {
+                $book = Book::all();
+            }
+            return datatables()->of($book)
+                        ->addColumn('action', function($data){
+                            $button = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
+                            $button .= '&nbsp;&nbsp;';
+                            $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';     
+                            return $button;
+                        })
+                        ->rawColumns(['action'])
+                        ->addIndexColumn()
+                        ->make(true);            
+        }
+        return view('books.index');
+ 
     }
 
     /**
@@ -44,42 +72,44 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
-        $a = $request->room;
+// dd($data);
+        // $a = $request->room;
        
-        $date_start = $request->input('date_start');
-        $hours_start = $request->input('hours_start');
-        $minutes_start = $request->input('minutes_start');
-        $date_end = $request->input('date_end');
-        $hours_end = $request->input('hours_end');
-        $minutes_end = $request->input('minutes_end');
+        // $date_start = $request->input('date_start');
+        // $hours_start = $request->input('hours_start');
+        // $minutes_start = $request->input('minutes_start');
+        // $date_end = $request->input('date_end');
+        // $hours_end = $request->input('hours_end');
+        // $minutes_end = $request->input('minutes_end');
         
-        #konvert ke unix
-        $start = strtotime((string) $date_start." ".$hours_start.":".$minutes_start);
-        $end = strtotime((string) $date_end." ".$hours_end.":".$minutes_end);
+        // #konvert ke unix
+        // $start = strtotime((string) $date_start." ".$hours_start.":".$minutes_start);
+        // $end = strtotime((string) $date_end." ".$hours_end.":".$minutes_end);
         
-        $data['start']=$start;
-        $data['end']=$end;
+        // $data['start']=$start;
+        // $data['end']=$end;
         
+        Book::create($data);
         // $book = Book::where('room',$request->room);
 
-        $book = DB::table('books')
-                ->where('room', $request->room)
-                ->select('books.start','books.end')
-                ->get();
-                $stugas = Book::all();   
-                dd($stugas);
-                $mulai = $stugas->start;
-                dd($mulai); 
-        $mulai = $book->start;
-        dd($mulai);
+        // $book = DB::table('books')
+        //         ->where('room', $request->room)
+        //         ->select('books.start','books.end')
+        //         ->get();
+                 
+        //         $stugas = Book::get();   
+               
+        //         $mulai = $stugas->start;
+                 
+        // $mulai = $book->start;
+       
         // cara cek jadwal apakah masih available?
-        if ($start < $book->start and $end > $book->end){
-            Book::create($data);
-        }
-        else{
+        // if ($start < $book->start and $end > $book->end){
+        //     Book::create($data);
+        // }
+        // else{
             
-        }
+        // }
         
 
         return redirect()->route('books.index');
@@ -116,9 +146,13 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        $data = $request->all();
+
+        $book->update($data);
+
+        return redirect()->route('books.index');
     }
 
     /**

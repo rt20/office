@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Peminjaman</h1>
+            <h1>Data Peminjaman Barang</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -32,8 +32,8 @@
                     + Pinjam Barang
                 </a>
             </div>
-            <div class="bg-white">
-                <table class="table-auto w-full">
+            <div class="bg-white" style="overflow-x:auto;">
+                <table class="table-auto w-full" >
                     <thead>
                     <tr>
                         <th class="border px-6 py-4">No</th>

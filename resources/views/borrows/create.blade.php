@@ -53,9 +53,9 @@
                             <div class="col-sm-2">
                                 Nama Peminjam*
                             </div>
-                            <div class="col-sm-9">
+                            <div class="col-sm-4">
                                 <input value="{{ old('borrower') }}" name="borrower"
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                class="form-control form-control-sm" 
                                     id="borrower" type="text" placeholder="Nama Peminjam" required>
                             </div><br>
                         </div>
@@ -66,9 +66,8 @@
                                 Nama Barang*
                             </div>
                             <div class="col-sm-9">
-                                <select name="item_id" id="select2"
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    required>
+                                <select name="item_id" id="selectbarang"
+                                class="form-control form-control-sm" required>
                                     <option value=""></option>
                                     @foreach($items ?? '' as $item)
                                     <option value="{{ $item->id }}"
@@ -107,20 +106,20 @@
                                 Tanggal Mulai*
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" name="start" id="start"
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                <input type="text" name="start" id="date_start" readonly placeholder="Tanggal mulai"
+                                class="form-control form-control-sm datepicker" 
                                     style="width: 100%;" value="{{old('start')}}" required>
                             </div>
                             <div class="col-sm-1">
 
                             </div>
                             <div class="col-sm-2">
-                                Tanggal Selesai
+                                Tanggal Selesai*
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" name="end" id="end"
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('end')}}">
+                                <input type="text" name="end" id="date_end" readonly placeholder="Tanggal selesai"
+                                class="form-control form-control-sm datepicker" 
+                                    style="width: 100%;" value="{{old('end')}}" required>
                             </div>
                         </div>
                         <br>
@@ -130,8 +129,13 @@
                             </div>
                             <div class="col-sm-9">
                                 <input value="{{ old('agenda') }}" name="agenda"
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="agenda" type="text" placeholder="Agenda" required>
+                                class="form-control form-control-sm" 
+                                    id="agenda" type="text" placeholder="Agenda Kegiatan" required>
+                            </div>
+                            <div class="col-sm-9">
+                                <input value="DIPINJAM" name="status"
+                                class="form-control form-control-sm" 
+                                    id="status" type="hidden" required>
                             </div></br>
                         </div>
                         <br>
@@ -139,13 +143,13 @@
                             <div class="col-sm-2">
                             </div>
 
-                            <div class="col-sm-5">
+                            <div class="col-sm-9">
                                 <input type="checkbox" name="is_agree" value="1" required>
 
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-light" data-toggle="modal"
                                     data-target="#exampleModalCenter">
-                                    Syarat dan Ketentuan
+                                    Saya setuju dengan syarat dan ketentuan yang berlaku
                                 </button>
 
                                 <!-- Modal -->
@@ -162,9 +166,9 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                Peminjam yang menerima Barang Milik Negara tersebut <b> bertanggungjawab
+                                                Peminjam yang menerima Barang Milik Negara tersebut setuju untuk<b> bertanggungjawab
                                                     atas kehilangan dan kerusakan </b> karena kelalaian pribadi Barang
-                                                Milik Negara
+                                                Milik Negara.
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"

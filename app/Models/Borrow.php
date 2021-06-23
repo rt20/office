@@ -10,10 +10,7 @@ class Borrow extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = [
-        'borrower', 'item_id', 'is_agree','code', 'agenda','start', 'end'
-        
-    ];
+    protected $guarded = [];
 
     public function item()
 	{

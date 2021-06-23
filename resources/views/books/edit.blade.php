@@ -69,7 +69,7 @@
                                 <select name="room"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" style="width: 40%;" required>
-                                    <option value="">- Pilih Ruangan Daring/Luring</option>
+                                    <option value="{{ old('pic') ?? $item->room }}">{{ old('pic') ?? $item->room }}</option>
                                     <option value="Zoom Meeting 1 (ditwas.prrs)">Zoom Meeting 1 (ditwas.prrs)</option>
                                     <option value="Zoom Meeting 2 (inspeksisedang.btp)">Zoom Meeting 2
                                         (inspeksisedang.btp)</option>
@@ -117,9 +117,9 @@
                                 Tanggal Mulai*
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" name="mulai"
+                                <input type="date" name="date_start"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('mulai')}}">
+                                    style="width: 100%;" value="{{ old('date_start') ?? $item->date_start}}">
                             </div>
                             <div class="col-sm-1">
 
@@ -128,29 +128,9 @@
                                 Waktu Mulai*
                             </div>
                             <div class="col-sm-3">
-                                <select name="hours_start"
-                                    class="bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 40%;" required>
-                                    <?php foreach(range(1,23) as $i):?>
-                                    <?php if($i<=9):?>
-                                    <option value="<?='0'.$i?>"><?='0'.$i?></option>
-                                    <?php else:?>
-                                    <option value="<?=$i?>"><?=$i?></option>
-                                    <?php endif;?>
-                                    <?php endforeach;?>
-                                </select>
-
-                                <select name="minutes_start"
-                                    class="bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 40%;">
-                                    <?php foreach(range(0,59) as $i):?>
-                                    <?php if($i<=9):?>
-                                    <option value="<?='0'.$i?>"><?='0'.$i?></option>
-                                    <?php else:?>
-                                    <option value="<?=$i?>"><?=$i?></option>
-                                    <?php endif;?>
-                                    <?php endforeach;?>
-                                </select>
+                            <input type="time" name="time_start" 
+                                    class="form control appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    style="width: 100%;" value="{{ old('time_start') ?? $item->time_start}}" placeholder="Waktu mulai kegiatan" required> 
                             </div>
                         </div>
                         <br>
@@ -160,9 +140,9 @@
                                 Tanggal Selesai*
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" name="selesai" 
+                                <input type="date" name="date_end" 
                                     class="form control appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai kegiatan" required> 
+                                    style="width: 100%;" value="{{ old('date_end') ?? $item->date_end}}" placeholder="Waktu selesai kegiatan" required> 
                             </div>
                             <div class="col-sm-1">
 
@@ -171,29 +151,9 @@
                                 Waktu Selesai*
                             </div>
                             <div class="col-sm-3">
-                                <select name="hours_end"
-                                    class="bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 40%;" required>
-                                    <?php foreach(range(1,23) as $i):?>
-                                    <?php if($i<=9):?>
-                                    <option value="<?='0'.$i?>"><?='0'.$i?></option>
-                                    <?php else:?>
-                                    <option value="<?=$i?>"><?=$i?></option>
-                                    <?php endif;?>
-                                    <?php endforeach;?>
-                                </select>
-
-                                <select name="minutes_end"
-                                    class="bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 40%;">
-                                    <?php foreach(range(0,59) as $i):?>
-                                    <?php if($i<=9):?>
-                                    <option value="<?='0'.$i?>"><?='0'.$i?></option>
-                                    <?php else:?>
-                                    <option value="<?=$i?>"><?=$i?></option>
-                                    <?php endif;?>
-                                    <?php endforeach;?>
-                                </select>
+                            <input type="time" name="time_end" 
+                                    class="form control appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    style="width: 100%;" value="{{ old('time_end') ?? $item->time_end}}" placeholder="Waktu selesai kegiatan" required> 
                             </div>
                         </div>
                         <br>
@@ -202,7 +162,7 @@
                                 Meeting ID
                             </div>
                             <div class="col-sm-3">
-                                <input value="{{ old('meetingid') }}" name="meetingid"
+                                <input value="{{ old('meetingid') ?? $item->meetingid}}" name="meetingid"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" placeholder="Meeting ID">
                             </div>
@@ -213,7 +173,7 @@
                                 Passcode
                             </div>
                             <div class="col-sm-3">
-                                <input value="{{ old('password') }}" name="password"
+                                <input value="{{ old('password')?? $item->password }}" name="password"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" placeholder="Passcode">
                             </div>
@@ -221,10 +181,10 @@
                         <br>
                         <div class="row">
                             <div class="col-sm-2">
-                                Link Zoom
+                                Link Zoom*
                             </div>
                             <div class="col-sm-9">
-                                <input value="{{ old('link') }}" name="link"
+                                <input value="{{ old('link') ?? $item->link}}" name="link" required
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" placeholder="Link Zoom">
                             </div></br>

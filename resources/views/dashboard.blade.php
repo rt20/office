@@ -29,142 +29,137 @@
             <!-- Info boxes -->
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $book }}</h3>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">Pegawai WFO</span>
-                            <span class="info-box-number">
-                                30
-                                <small>%</small>
-                            </span>
+                            <p>Booking Ruangan</p>
                         </div>
-                        <!-- /.info-box-content -->
+                        <div class="icon">
+                            <i class="ion ion-android-alarm-clock"></i>
+                        </div>
+                        <a href="{{ route('books.index') }}" class="small-box-footer">Detail info <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                    <!-- /.info-box -->
+                    <!-- /.col -->
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $borrowcount }}</h3>
+
+                            <p>Pinjam Barang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-android-laptop"></i>
+                        </div>
+                        <a href="{{ route('borrows.index') }}" class="small-box-footer">Detail info <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-pallet"></i></i></span>
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $schedule }}</h3>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">Barang Dipinjam</span>
-                            <span class="info-box-number">10</span>
+                            <p>Agenda Kegiatan</p>
                         </div>
-                        <!-- /.info-box-content -->
+                        <div class="icon">
+                            <i class="ion ion-android-calendar"></i>
+                        </div>
+                        <a href="{{ route('schedules.index') }}" class="small-box-footer">Detail info <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                    <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-
-                <!-- fix for small devices only -->
-                <div class="clearfix hidden-md-up"></div>
-
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-car"></i></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Pemakaian Mobil</span>
-                            <span class="info-box-number">1</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Pegawai</span>
-                            <span class="info-box-number">66</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
+            <!-- /.col -->
+
+
+            <!-- fix for small devices only -->
+           
+        <!-- /.row -->
 
 
 
-            <!-- Main row -->
-            <div class="row">
-                <!-- Left col -->
-                <!-- <div class="col-md-8"> -->
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <!-- <div class="col-md-8"> -->
 
 
 
-                    <!-- TABLE: LATEST BOOKING -->
-                    <div class="card">
-                        <div class="card-header border-transparent">
-                            <h3 class="card-title">Peminjaman Terakhir</h3>
+            <!-- TABLE: LATEST BOOKING -->
+            <div class="card">
+                <div class="card-header border-transparent">
+                    <h3 class="card-title">Peminjaman Barang</h3>
 
-                           
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table m-0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Peminjam</th>
-                                            <th>Nama Barang</th>
-                                            <th>Merk</th>
-                                            <th>Mulai</th>
-                                            <th>Selesai</th>
-                                            <th>Agenda</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse($borrow as $p)
-                                        <tr>
-                                            <td >
-                                                {{ ($borrow->currentPage()-1) * $borrow->perPage()+$loop->index+1 }}
-                                            </td>
-                                            <td ">{{ $p->borrower }}</td>
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-sm"">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Peminjam</th>
+                                    <th>Nama Barang</th>
+                                    <th>Merk</th>
+                                    <th>Mulai</th>
+                                    <th>Selesai</th>
+                                    <th>Agenda</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($borrow as $p) 
+                                <tr>
+                                    <td>
+                                        {{ ($borrow->currentPage()-1) * $borrow->perPage()+$loop->index+1 }}
+                                    </td>
+                                    <td ">{{ $p->borrower }}</td>
                                             <td >{{ $p->item->item }}</td>
                                             <td >{{ $p->item->merk }}</td>
                                             <td >{{ date('d F y', strtotime($p->start)) }}
                                             </td>
                                             <td >{{ date('d F y', strtotime($p->end)) }}</td>
                                             <td >{{ $p->agenda }}</td>
-                                            <td><span class="badge badge-danger">Dipinjam</span></td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td>
-                                                Data Tidak Ditemukan
-                                            </td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.card-body -->
-
-                        <!-- /.card-footer -->
+                                            <td><span class=" badge badge-danger">{{ $p->status }}</span></td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td>
+                                        Data Tidak Ditemukan
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- /.card -->
-                <!-- </div> -->
-                <!-- /.col -->
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.card-body -->
 
-               
-                <!-- /.col -->
+                <!-- /.card-footer -->
             </div>
-            <!-- /.row -->
+            <!-- /.card -->
+            <!-- </div> -->
+            <!-- /.col -->
+
+
+            <!-- /.col -->
         </div>
-        <!--/. container-fluid -->
-    </section>
-    <!-- /.content -->
+        <!-- /.row -->
+</div>
+<!--/. container-fluid -->
+</section>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 

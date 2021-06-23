@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
-use App\Imports\ItemsImport;
-use Maatwebsite\Excel\Facades\Excel;
-
 use Illuminate\Http\Request;
+use App\Models\Schedule;
 
-class ItemController extends Controller
+class ScheduleController extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +18,10 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $item = Item::orderBy('id', 'desc')->paginate(10);
-    
-        return view ('items.index',[
-            'item' => $item
+        $schedule = Schedule::orderBy('id', 'desc')->paginate(10);
+
+        return view ('schedules.index',[
+            'schedule' => $schedule
     ]);
     }
 
@@ -31,7 +32,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('items.create');
+        return view('schedules.create');
     }
 
     /**
@@ -43,10 +44,13 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
-        Item::create($data);
+        // dd($data);
+        Schedule::create($data);
 
-        return redirect()->route('items.index');
+        # Tampilin flash message
+        flash('Selamat data telah berhasil ditambahkan')->success();
+
+        return redirect()->route('schedules.index');
     }
 
     /**
@@ -66,10 +70,10 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit(Schedule $schedule)
     {
-        return view('items.edit',[
-            'item' => $item
+        return view('schedules.edit',[
+            'schedule' => $schedule
         ]);
     }
 
@@ -80,13 +84,14 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request, Schedule $schedule)
     {
         $data = $request->all();
 
-        $item->update($data);
+        $schedule->update($data);
+        flash('Selamat data telah berhasil diupdate')->success();
 
-        return redirect()->route('items.index');
+        return redirect()->route('schedules.index');
     }
 
     /**
@@ -95,18 +100,11 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(Schedule $schedule)
     {
-        $item->delete();
-        
+        $schedule->delete();
+        flash('Data telah berhasil dihapus')->error();
 
-        return redirect()->route('items.index');
-    }
-    public function import() 
-    {
-        Excel::import(new ItemsImport, request()->file('item'));
-
-        
-        return redirect()->route('items.index')->with('success', 'All good!');
+        return redirect()->route('schedules.index');
     }
 }

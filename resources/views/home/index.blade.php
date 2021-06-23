@@ -82,19 +82,19 @@
                         <th scope="col">Waktu Mulai</th>
                         <th scope="col">Waktu Selesai</th>
                         <th scope="col">PIC</th>
-                     
+                      
                     </tr>
                     </thead>
                     <tbody>
                         @forelse($book as $item)
                             <tr>
                                 <td >{{ ($book->currentPage()-1) * $book->perPage()+$loop->index+1 }}</td>
-                                <td >{{ date('d F Y', $item->start)}}</td>
-                                <td >{{ date('d F Y', $item->end) }}</td>
+                                <td >{{ $item->date_start}}</td>
+                                <td >{{ $item->date_end }}</td>
                                 <td >{{ $item->agenda }}</td>
                                 <td >{{ $item->room }}</td>
-                                <td >{{ date('H:i', $item->start) }}</td>
-                                <td >{{ date('H:i', $item->end) }}</td>
+                                <td >{{$item->time_start}}</td>
+                                <td >{{  $item->time_end }}</td>
                                 <td >{{ $item->pic }}</td>
                                
                             </tr>
