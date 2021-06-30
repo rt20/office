@@ -116,9 +116,20 @@
                                 Tanggal Mulai*
                             </div>
                             <div class="col-sm-3">
-                                <input type="text" name="date_start" id="date_start" readonly
-                                    class="form-control datepicker appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('date_start')}}" placeholder="Waktu mulai kegiatan" required>
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+
+                                    <input type="text" name="date_start" id="date_start" readonly
+                                        class="form-control datepicker appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        style="width: 100%;" value="{{old('date_start')}}" placeholder="Waktu mulai"
+                                        required>
+                                </div>
+
+
+
                             </div>
                             <div class="col-sm-1">
 
@@ -127,21 +138,33 @@
                                 Waktu Mulai*
                             </div>
                             <div class="col-sm-3">
-                            <input type="time" name="time_start" id="time_start"
+                                <input type="time" name="time_start" id="time_start"
                                     class="form control appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai kegiatan" required> 
+                                    style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai kegiatan"
+                                    required>
                             </div>
                         </div>
                         <br>
-                     
+
                         <div class="row">
                             <div class="col-sm-2">
                                 Tanggal Selesai*
                             </div>
                             <div class="col-sm-3">
-                                <input type="text" name="date_end"  id="date_end" readonly
-                                    class="form-control datepicker appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai kegiatan" required> 
+
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+
+                                    <input type="text" name="date_end" id="date_end" readonly
+                                        class="form-control datepicker appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai"
+                                        required>
+                                </div>
+
+
                             </div>
                             <div class="col-sm-1">
 
@@ -150,9 +173,10 @@
                                 Waktu Selesai*
                             </div>
                             <div class="col-sm-3">
-                            <input type="time" name="time_end" id="time_end"
+                                <input type="time" name="time_end" id="time_end"
                                     class="form control appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai kegiatan" required> 
+                                    style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai kegiatan"
+                                    required>
                             </div>
                         </div>
                         <br>
@@ -180,12 +204,13 @@
                         <br>
                         <div class="row">
                             <div class="col-sm-2">
-                                Link Zoom*
+                                Link Meeting
                             </div>
                             <div class="col-sm-9">
-                                <input value="{{ old('link') }}" name="link" required
+                                <input value="{{ old('link') }}" name="link"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Link Zoom">
+                                    id="grid-last-name" type="text"
+                                    placeholder="Link Zoom / Google Meet / Video Conference">
                             </div></br>
                         </div>
                         <br>

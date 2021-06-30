@@ -58,7 +58,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-10">
-                        <h1>Jadwal Pemakaian Ruang Rapat Luring / Daring</h1>
+                        <h1>Jadwal Pemakaian Ruang Rapat Luring / Daring Hari Ini</h1>
                     </div>
                    
                 </div>
@@ -67,11 +67,11 @@
 
         <!-- Main content -->
         <section class="content">
-        <div class="py-1">
+        <div class="py-1"> 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-3">
    
             <div class="bg-white">
-                <table id="data_table" class="table">
+                <table id="data_table" class="table table-responsive">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">No</th>

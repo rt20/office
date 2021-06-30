@@ -17,6 +17,7 @@
                   data-accordion="false">
                   <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               @guest
                   <a href="{{ route('login') }}" title="Login e-Office">
                       <div class="info-box bg-info">
 
@@ -29,6 +30,21 @@
                           <!-- /.info-box-content -->
                       </div>
                   </a>
+                  @endguest
+                  @auth
+                  <a href="/dashboard" title="Login e-Office">
+                      <div class="info-box bg-info">
+
+                          <span class="info-box-icon"><i class="fas fa-tachometer-alt"></i></span>
+
+                          <div class="info-box-content">
+                              <span class="info-box-text">Dashboard</span>
+
+                          </div>
+                          <!-- /.info-box-content -->
+                      </div>
+                  </a>
+                  @endauth
                   <a href="http://sipensa.balok.id" target="_blank" title="Sistem Informasi Pengawasan Sarana"> 
                   <div class="info-box bg-warning">
                       <span class="info-box-icon"><i class="fas fa-store"></i></span>

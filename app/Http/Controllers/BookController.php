@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use App\Http\Requests\UserRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
 use DB;
-
+use Mail;
+use App\Mail\BookSuccess;
 
 class BookController extends Controller
 {
@@ -72,45 +73,14 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-// dd($data);
-        // $a = $request->room;
-       
-        // $date_start = $request->input('date_start');
-        // $hours_start = $request->input('hours_start');
-        // $minutes_start = $request->input('minutes_start');
-        // $date_end = $request->input('date_end');
-        // $hours_end = $request->input('hours_end');
-        // $minutes_end = $request->input('minutes_end');
-        
-        // #konvert ke unix
-        // $start = strtotime((string) $date_start." ".$hours_start.":".$minutes_start);
-        // $end = strtotime((string) $date_end." ".$hours_end.":".$minutes_end);
-        
-        // $data['start']=$start;
-        // $data['end']=$end;
+
         
         Book::create($data);
-        // $book = Book::where('room',$request->room);
-
-        // $book = DB::table('books')
-        //         ->where('room', $request->room)
-        //         ->select('books.start','books.end')
-        //         ->get();
-                 
-        //         $stugas = Book::get();   
-               
-        //         $mulai = $stugas->start;
-                 
-        // $mulai = $book->start;
        
-        // cara cek jadwal apakah masih available?
-        // if ($start < $book->start and $end > $book->end){
-        //     Book::create($data);
-        // }
-        // else{
-            
-        // }
-        
+    //    kirim email ke user 
+        Mail::to('kaploks@gmail.com')->send(
+            new BookSuccess($data)
+        );
 
         return redirect()->route('books.index');
     }

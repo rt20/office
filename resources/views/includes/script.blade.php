@@ -32,6 +32,7 @@
 <!-- notif kecil dibawah -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
         integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
+        
 <script>
     //CSRF TOKEN PADA HEADER
     //Script ini wajib krn kita butuh csrf token setiap kali mengirim request post, patch, put dan delete ke server
@@ -121,15 +122,169 @@
                         name: 'room'
                     },
                     {
-                        data: 'link',
-                        name: 'link',
-                        render: function (data, type, row, meta) {
-                            return '<a href="' + data + '" target="_blank">' + data + '</a>';
-                        }
-                    },
+                            data: 'link',
+                            name: 'link',
+                            render: function ( data, type, row, meta ) {
+                                if (data == null) {
+                                        return '';
+                                        }
+                                    else {
+                                        return '<a href='+ data +'><i class="fa fa-link"></i></a>';
+                                        }
+                            }
+                        },
                     {
                         data: 'pic',
                         name: 'pic'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action'
+                    },
+                ],
+                order: [
+                    [0, 'desc']
+                ]
+            });
+        }
+       
+    });
+
+    //jika klik class delete (yang ada pada tombol delete) maka tampilkan modal konfirmasi hapus maka
+    $(document).on('click', '.delete', function () {
+        dataId = $(this).attr('id');
+        $('#konfirmasi-modal').modal('show');
+    });
+
+    //jika tombol hapus pada modal konfirmasi di klik maka
+    $('#tombol-hapus').click(function () {
+        $.ajax({
+            url: "books/" + dataId, //eksekusi ajax ke url ini
+            type: 'DELETE',
+            beforeSend: function () {
+                $('#tombol-hapus').text('Hapus'); //set text untuk tombol hapus
+            },
+            success: function (data) { //jika sukses
+                setTimeout(function () {
+                    $('#konfirmasi-modal').modal('hide'); //sembunyikan konfirmasi modal
+                    var oTable = $('#booking').dataTable();
+                    oTable.fnDraw(false); //reset datatable
+                });
+                iziToast.warning({ //tampilkan izitoast warning
+                    title: 'Data Berhasil Dihapus',
+                    message: '{{ Session('delete ')}}',
+                    position: 'bottomRight'
+                });
+            }
+        })
+    });
+</script>
+
+<!-- menu schedule -->
+<script>
+    //CSRF TOKEN PADA HEADER
+    //Script ini wajib krn kita butuh csrf token setiap kali mengirim request post, patch, put dan delete ke server
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        //jalankan function load_data diawal agar data ter-load
+        load_data();
+        //Iniliasi datepicker pada class input
+        $('.input-daterange').datepicker({
+            todayBtn: 'linked',
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        }); 
+        $('#filter').click(function () {
+            var from_date = $('#from_date').val();
+            var to_date = $('#to_date').val();
+            if (from_date != '' && to_date != '') {
+                $('#schedule').DataTable().destroy();
+                load_data(from_date, to_date);
+            } else {
+                alert('Both Date is required');
+            }
+        });
+        $('#refresh').click(function () {
+            $('#from_date').val('');
+            $('#to_date').val('');
+            $('#schedule').DataTable().destroy();
+            load_data();
+        });
+        $('#bersih').click(function () {
+            $('#date').val('');
+            $('#time').val('');
+            $('#date_end').val('');
+            $('#time_end').val('');
+            $('#agenda').val('');
+            $('#organizer').val('');
+            $('#location').val('');
+            $('#link').val('');
+            $('#note').val('');
+            $('#attachment').val('');
+            $('#participant').val('');
+            $('#participant').val('');
+        });
+
+        //LOAD DATATABLE
+        //script untuk memanggil data json dari server dan menampilkannya berupa datatable
+        //load data menggunakan parameter tanggal dari dan tanggal hingga
+       
+        function load_data (from_date = '', to_date = '') {
+            $('#schedule').DataTable({
+                processing: true,
+                serverSide: true, //aktifkan server-side 
+                ajax: {
+                    // url: "{{ route('schedules.index') }}",
+                    url: "https://office.balok.id/dashboard/schedules", 
+                    type: 'GET',
+                    data: {
+                        from_date: from_date,
+                        to_date: to_date
+                    } //jangan lupa kirim parameter tanggal 
+                },
+                columns: [{
+                        data: 'date_start',
+                        name: 'date_start'
+                    },
+                    {
+                        data: 'time_start',
+                        name: 'time_start'
+                    },
+                    {
+                        data: 'agenda',
+                        name: 'agenda'
+                    },
+                    {
+                        data: 'location',
+                        name: 'location'
+                    },
+                    {
+                        data: 'organizer',
+                        name: 'organizer'
+                    },
+                    {
+                        data: 'participant',
+                        name: 'participant'
+                    },
+                    {
+                            data: 'attachment',
+                            name: 'attachment',
+                            render: function ( data, type, row, meta ) {
+                                if (data == null) {
+                                        return '';
+                                        }
+                                    else {
+                                        return '<a href='+ data +'><i class="fa fa-download"></i></a>';
+                                        }
+                            }
+                    },
+                    {
+                        data: 'note',
+                        name: 'note'
                     },
                     {
                         data: 'action',
@@ -172,8 +327,6 @@
         })
     });
 </script>
-
-
 <!-- select2 di create borrow -->
 <script>
     $('#selectbarang').select2({
@@ -202,9 +355,9 @@
         return false;
     })
 </script>
-<!-- map api google  -->
+<!-- map api google  --> 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWd7tSEONvnnq9uzd9etwxkpy7-tgn6jI&callback=initMap" async
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP7mv5XP5wWJp8Wn-iTjuWmix4pPmB4l8&callback=initMap" async
     defer></script>
 <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script>
@@ -250,6 +403,7 @@
     // event jendela di-load  
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+
 
 <!-- tanggal awal kurang dari tanggal akhir -->
 <script type="text/javascript">

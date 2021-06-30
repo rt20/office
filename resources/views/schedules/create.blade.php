@@ -30,31 +30,47 @@
         <div class="card">
             <div class="card-header">
                 <!-- <form action="{{ asset("/stugas") }}" method="POST"> -->
-                <form action="{{ route('schedules.store')}}" method="post">
+                <form action="{{ route('schedules.store')}}" method="post" enctype='multipart/form-data'>
                     @csrf
                     <div class="container">
                         <div class="row">
 
                             <div class="col-sm-2">
-                                Tanggal Kegiatan*
+                                Mulai*
                             </div>
                             <div class="col-sm-auto">
-                                <input type="date" name="date" class="form-control form-control-sm"
-                                    value="{{old('date')}} " required>
+                                <input type="date" name="date_start" class="form-control datepicker form-control-sm"
+                                    id="date_start" readonly value="{{old('date_start')}} " required>
                             </div>
                             <div class="col-sm-auto">
                                 Waktu*
                             </div>
                             <div class="col-sm-auto">
-                                <input type="time" name="time" class="form-control form-control-sm"
+                                <input type="time" name="time_start" class="form-control form-control-sm"
+                                    value="{{old('time_start')}}" required>
+                            </div>
+                            WIB
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-sm-2">
+                                Selesai*
+                            </div>
+                            <div class="col-sm-auto">
+                                <input type="date" name="date_end" class="form-control datepicker form-control-sm"
+                                    id="date_end" readonly value="{{old('date')}} " required>
+                            </div>
+                            <div class="col-sm-auto">
+                                Waktu*
+                            </div>
+                            <div class="col-sm-auto">
+                                <input type="time" name="time_end" class="form-control form-control-sm"
                                     value="{{old('time')}}" required>
                             </div>
                             WIB
                         </div>
-
-
                         <br>
-
                         <div class="row">
                             <div class="col-sm-2">
                                 Agenda*
@@ -77,10 +93,10 @@
                         <br>
                         <div class="row">
                             <div class="col-sm-2">
-                                Penyelenggara
+                                Penyelenggara*
                             </div>
                             <div class="col-sm-5">
-                                <input type="text" name="organizer" placeholder="Penyelenggara Kegiatan/ Acara"
+                                <input type="text" name="organizer" placeholder="Penyelenggara Kegiatan/ Acara" required
                                     class="form-control form-control-sm" value="{{old('organizer')}}">
                             </div>
                         </div>
@@ -98,11 +114,11 @@
                         <br>
                         <div class="row">
                             <div class="col-sm-2">
-                                Nomor HP
+                                Email
                             </div>
                             <div class="col-sm-5">
-                                <input type="text" name="phone" placeholder="Nomor HP Whatsapp"
-                                    class="form-control form-control-sm" value="{{old('phone')}}">
+                                <input type="text" name="email" placeholder="Email peserta"
+                                    class="form-control form-control-sm" value="{{old('email')}}">
                             </div>
                         </div>
                         <br>
@@ -120,12 +136,6 @@
                             <div class="col-sm-2"> Lampiran
                             </div>
                             <div class="col-sm-5">
-                                <!-- <div class="input-group input-group-sm">
-                  <input type="file" class="form-control" name="attachment" placeholder="Lampiran" value="{{old('attachment')}}">
-                  <span class="input-group-append">
-                    <button type="button" class="btn btn-info btn-flat">Go!</button>
-                  </span>
-                </div> -->
                                 <input type="file" name="attachment" class="form-control form-control-sm"
                                     placeholder="Lampiran" value="{{old('attachment')}}">
                             </div>
@@ -141,7 +151,7 @@
                             <div class="col-sm-2">
                             </div>
 
-                           
+
 
                             <div class="col-sm-4">
 

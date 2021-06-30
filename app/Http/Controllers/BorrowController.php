@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Borrow;
 use App\Models\Item;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -17,7 +18,9 @@ class BorrowController extends Controller
     public function index(Request $request)
     {
         $items = Item::paginate(10);
+        
         $borrow = Borrow::orderBy('start', 'desc')->get();
+        // $borrow = Borrow::where('status', 'KEMBALI')->get();
         
 
         return view('borrows.index', [
@@ -33,8 +36,11 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        $items = Item::all();
-      
+        
+        // menampilkan barang yang tersedia
+        $items = DB::select('SELECT * from items WHERE id NOT IN (SELECT item_id from borrows where status ="DIPINJAM")');
+
+
         return view('borrows.create', [
             'items' => $items
         ]);

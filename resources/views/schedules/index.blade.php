@@ -26,69 +26,50 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="py-1">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-10">
-                <a href="{{ route('schedules.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                    + Tambah Jadwal
-                </a>
+    <div class="card">
+            <div class="card-body">
+                <div class="row input-daterange">
+                    <div class="col-sm-2">
+                        <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date"
+                            readonly />
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date"
+                            readonly />
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" name="filter" id="filter" class="btn btn-primary">Filter</button>
+                        <button type="button" name="refresh" id="refresh" class="btn btn-info">Refresh</button>
+                        <!-- <button type="button" name="today" id="today" class="btn btn-success">Hari ini</button> -->
+                    </div>
+                    <div class="col-sm-auto">
+                        <a href="{{ route('schedules.create') }}"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-3 rounded float-right">
+                            + Agenda
+                        </a>
+                    </div>
+                </div>
             </div>
-          
-            <!-- <div class="bg-white"> -->
-            <div class="card-body table-responsive p-0" style="overflow-x:auto;">
-                <table class="table-auto w-full">
+            <!-- AKHIR DATE RANGE PICKER -->
+
+            <div class="card-body">
+
+                <div class="card-body table-responsive" style="overflow-x:auto;">
+                <table id="schedule" class="table-auto table-striped table-bordered w-full">
                     <thead>
                     <tr>
-                        <th class="border px-6 py-4">No</th>
-                        <th class="border px-6 py-4">Hari, Tanggal</th>
-                        <th class="border px-6 py-4">Waktu</th>
-                        <th class="border px-6 py-4">Agenda</th>
-                        <th class="border px-6 py-4">Lokasi</th>
-                        <th class="border px-6 py-4">Penyelenggara</th>
-                        <th class="border px-6 py-4">Peserta</th>
-                        <th class="border px-6 py-4">No HP</th>
-                        <th class="border px-6 py-4">Lampiran</th>
-                        <th class="border px-6 py-4">Keterangan</th>
-                        <th class="border px-6 py-4">Action</th>
+                        <th>Hari, Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Agenda</th>
+                        <th>Lokasi</th>
+                        <th>Penyelenggara</th>
+                        <th>Peserta</th>
+                        <th>Lampiran</th>
+                        <th>Keterangan</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
-                    <tbody>
-                        @forelse($schedule as $data)
-                            <tr>
-                                <td class="border px-6 py-4">{{ ($schedule->currentPage()-1) * $schedule->perPage()+$loop->index+1 }}</td>
-                                <td class="border px-6 py-4 ">{{ $data->date }}</td>
-                                <td class="border px-6 py-4">{{ $data->time }}</td>
-                                <td class="border px-6 py-4">{{ $data->agenda }}</td>
-                                <td class="border px-6 py-4">{{ $data->location }}</td>
-                                <td class="border px-6 py-4">{{ $data->organizer }}</td>
-                                <td class="border px-6 py-4">{{ $data->participant }}</td>
-                                <td class="border px-6 py-4">{{ $data->phone }}</td>
-                                <td class="border px-6 py-4">{{ $data->attachment }}</td>
-                                <td class="border px-6 py-4">{{ $data->note }}</td>
-                                <td class="border px-6 py- text-center">
-                                    <a href="{{ route('schedules.edit', $data->id) }}" class="btn btn-success btn-sm" title="Ubah">
-                                    <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('schedules.destroy', $data->id) }}" method="POST" class="d-inline" title="Hapus">
-                                        {!! method_field('delete') . csrf_field() !!}
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ?')">
-                                        <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                               <td colspan="10" class="border text-center p-8">
-                                   Data Tidak Ditemukan
-                               </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
                 </table>
-            </div>
-            <div class="text-center mt-5">
-                {{ $schedule->links() }}
             </div>
         </div>
     
