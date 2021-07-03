@@ -158,7 +158,7 @@
                                         <i class="far fa-calendar-alt"></i>
                                     </span>
 
-                                    <input type="text" name="date_end" id="date_end" readonly
+                                    <input type="text" name="date_end" id="date_end" readonly disabled
                                         class="form-control datepicker appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai"
                                         required>
