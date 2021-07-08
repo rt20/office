@@ -19,7 +19,6 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-
         if($request->ajax()){           
             //Jika request from_date ada value(datanya) maka
             if(!empty($request->from_date))
@@ -27,7 +26,9 @@ class BookController extends Controller
                 //Jika tanggal awal(from_date) hingga tanggal akhir(to_date) adalah sama maka
                 if($request->from_date === $request->to_date){
                     //kita filter tanggalnya sesuai dengan request from_date
-                    $book = Book::whereDate('date_start','=', $request->from_date)->get();
+                    $book = Book::whereDate('date_start','=', $request->from_date)
+                    ->where('room','=',$request->room)
+                    ->get();
                 }
                 else{
                     //kita filter dari tanggal awal ke akhir
@@ -73,7 +74,6 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
         
         Book::create($data);
        

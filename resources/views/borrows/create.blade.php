@@ -72,35 +72,14 @@
                                     @foreach($items ?? '' as $item)
                                     <option value="{{ $item->id }}"
                                         {{ old('item_id') == $item->id ? 'selected' : null }}>
-                                        {{ $item->code }}.{{ $item->nup }} | {{ $item->item }} | {{ $item->merk }}
+                                        {{ $item->code }}.{{ $item->nup }} | {{ $item->item }} | {{ $item->tahun_perolehan }} | {{ $item->merk }}
                                     </option>
                                     @endforeach
                                 </select>
                             </div><br>
                         </div>
                         </br>
-                        <!-- <div class="row">
-                            <div class="col-sm-2">
-                                Merk
-                            </div>
-                            <div class="col-sm-3">
-                                <input value="{{ old('merk') }}" name="merk"
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="merk" type="text" placeholder="Merk">
-                            </div></br>
-                            <div class="col-sm-1">
-
-                            </div>
-                            <div class="col-sm-2">
-                                Kode BMN
-                            </div>
-                            <div class="col-sm-3">
-                                <input value="{{ old('code') }}" name="code"
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="code" type="text" placeholder="Kode BMN">
-                            </div>
-                        </div>
-                        <br> -->
+                      
                         <div class="row">
                             <div class="col-sm-2">
                                 Tanggal Mulai*
@@ -209,3 +188,15 @@
 
 
 @endsection
+@push('after-script')
+<!-- select2 di create borrow -->
+<script>
+    $('#selectbarang').select2({
+        placeholder: 'Pilih Barang',
+        allowClear: true,
+    });
+    $(document).ready(function () {
+
+    });
+</script>
+@endpush

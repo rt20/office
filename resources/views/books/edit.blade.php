@@ -181,10 +181,10 @@
                         <br>
                         <div class="row">
                             <div class="col-sm-2">
-                                Link Zoom*
+                                Link Zoom
                             </div>
                             <div class="col-sm-9">
-                                <input value="{{ old('link') ?? $item->link}}" name="link" required
+                                <input value="{{ old('link') ?? $item->link}}" name="link"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" placeholder="Link Zoom">
                             </div></br>

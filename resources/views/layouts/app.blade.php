@@ -14,18 +14,30 @@
     <!-- style -->
     @include('includes.style')
     @stack('after-style')
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQ3D5563GM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-CQ3D5563GM');
+
+    </script>
 </head>
 
 <body>
 
     @include('includes.header')
     @include('includes.sidebar')
-   
-        
-        @yield('content')
-    
-    
+
+
+    @yield('content')
+
+
     @include('includes.footer')
 
     @stack('before-script')
