@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use App\Http\Requests\UserRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -19,21 +19,19 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax()){           
+        if($request->ajax()){
             //Jika request from_date ada value(datanya) maka
             if(!empty($request->from_date))
-            { 
+            {
                 //Jika tanggal awal(from_date) hingga tanggal akhir(to_date) adalah sama maka
                 if($request->from_date === $request->to_date){
                     //kita filter tanggalnya sesuai dengan request from_date
-                    $book = Book::whereDate('date_start','=', $request->from_date)
-                    ->where('room','=',$request->room)
-                    ->get();
+                    $book = Book::whereDate('date_start','=', $request->from_date)->get();
                 }
                 else{
                     //kita filter dari tanggal awal ke akhir
                     $book = Book::whereBetween('date_start', array($request->from_date, $request->to_date))->get();
-                }                
+                }
             }
             //load data default
             else
@@ -44,15 +42,15 @@ class BookController extends Controller
                         ->addColumn('action', function($data){
                             $button = '<a href=" ./books/'.$data->id.'/edit" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
                             $button .= '&nbsp;&nbsp;';
-                            $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>';     
+                            $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>';
                             return $button;
                         })
                         ->rawColumns(['action'])
                         ->addIndexColumn()
-                        ->make(true);            
+                        ->make(true);
         }
         return view('books.index');
- 
+
     }
 
     /**
@@ -74,10 +72,10 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
+
         Book::create($data);
-       
-    //    kirim email ke user 
+
+    //    kirim email ke user
         Mail::to('kaploks@gmail.com')->send(
             new BookSuccess($data)
         );
@@ -138,5 +136,5 @@ class BookController extends Controller
         return redirect()->route('books.index');
     }
 
-    
+
 }

@@ -30,7 +30,7 @@
 
             <div class="card-body">
                 <div class="row input-daterange">
-                    <div class="col-sm-3">
+                    <!-- <div class="col-sm-3">
                         <select name="room" class="form-control" id="room-filter" type="text">
                             <option value="">Semua Ruangan</option>
                             <option value="Zoom Meeting 1 (ditwas.prrs)">Zoom Meeting 1 (ditwas.prrs)</option>
@@ -39,7 +39,7 @@
                             <option value="Zoom Meeting 3 (peredaranpangan)">Zoom Meeting 3 (peredaranpangan)</option>
                             <option value="Ruang Rapat Wasdar">Ruang Rapat Wasdar</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="col-sm-2">
                         <input type="text" name="from_date" id="from_date" class="form-control" placeholder="Tgl Awal"
                             readonly />
@@ -52,15 +52,15 @@
                         <button type="button" name="filter" id="filter" class="btn btn-primary">Filter</button>
                         <button type="button" name="refresh" id="refresh" class="btn btn-info"
                             title="Refresh Tabel Ke Semula">Refresh</button>
-                        <button type="button" name="today" id="today" class="btn btn-success">Hari ini</button>
+                        <!-- <button type="button" name="today" id="today" class="btn btn-success">Hari ini</button> -->
                     </div>
                     <!-- AKHIR DATE RANGE PICKER -->
 
-                    <div class="col-sm-1">
+                    <div class="col-sm-3">
                         <a href="{{ route('books.create') }}"
                             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-3 rounded float-left"
                             title="Tambah Booking Ruangan">
-                            +
+                            + Tambah
                         </a>
                     </div>
 
@@ -139,8 +139,8 @@
         $('#filter').click(function () {
             var from_date = $('#from_date').val();
             var to_date = $('#to_date').val();
-            var room = $('#room').val();
-            // console.log=([room]);
+            // var room = $('#room').val();
+            console.log=([from_date]);
             if (from_date != '' && to_date != '') {
                 $('#booking').DataTable().destroy();
                 load_data(from_date, to_date);
@@ -178,24 +178,24 @@
             $('#participant').val('');
         });
 
-       
+
         //LOAD DATATABLE
         //script untuk memanggil data json dari server dan menampilkannya berupa datatable
         //load data menggunakan parameter tanggal dari dan tanggal hingga
         function load_data(from_date = '', to_date = '') {
             $('#booking').DataTable({
                 processing: true,
-                serverSide: true, //aktifkan server-side 
+                serverSide: true, //aktifkan server-side
                 ajax: {
                     url: "{{ route('books.index') }}",
                     // url: "{{ url('/dashboard/books') }}",
-                    // url: "https://office.balok.id/dashboard/books", 
+                    // url: "https://office.balok.id/dashboard/books",
                     type: 'GET',
                     data: {
                         from_date: from_date,
                         to_date: to_date
                         // room: room
-                    } //jangan lupa kirim parameter tanggal 
+                    } //jangan lupa kirim parameter tanggal
                 },
                 columns: [{
                         data: 'date_start',
@@ -259,14 +259,13 @@
     $('#tombol-hapus').click(function () {
         $.ajax({
             url: "books/" + dataId, //eksekusi ajax ke url ini
-            type: 'DELETE',
-            beforeSend: function () {
-                $('#tombol-hapus').text('Hapus'); //set text untuk tombol hapus
-            },
+            type: 'delete',
+            beforeSend: function () { $('#tombol-hapus').text('Hapus..');}, //set text untuk tombol hapus
             success: function (data) { //jika sukses
                 setTimeout(function () {
                     $('#konfirmasi-modal').modal('hide'); //sembunyikan konfirmasi modal
                     var oTable = $('#booking').dataTable();
+                    $('#booking').DataTable().ajax.reload(null, false);
                     oTable.fnDraw(false); //reset datatable
                 });
                 iziToast.warning({ //tampilkan izitoast warning
