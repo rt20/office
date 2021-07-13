@@ -104,7 +104,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p><b>Data agenda kegiatan akan dihapus</b></p>
+                <p><b>Data booking ruangan akan dihapus</b></p>
                 <p>Apakah anda yakin?</p>
             </div>
             <div class="modal-footer bg-whitesmoke br">
@@ -116,6 +116,9 @@
 </div>
 
 <!-- AKHIR MODAL -->
+
+<!-- MULAI MODAL KONFIRMASI DELETE-->
+
 @endsection
 @push('after-script')
 
@@ -140,7 +143,7 @@
             var from_date = $('#from_date').val();
             var to_date = $('#to_date').val();
             // var room = $('#room').val();
-            console.log=([from_date]);
+            console.log = ([from_date]);
             if (from_date != '' && to_date != '') {
                 $('#booking').DataTable().destroy();
                 load_data(from_date, to_date);
@@ -247,36 +250,39 @@
             });
         }
 
+        //jika klik class delete (yang ada pada tombol delete) maka tampilkan modal konfirmasi hapus maka
+        $(document).on('click', '.delete', function () {
+            dataId = $(this).attr('id');
+            $('#konfirmasi-modal').modal('show');
+        });
+        //jika tombol hapus pada modal konfirmasi di klik maka
+        $('#tombol-hapus').click(function () {
+            $.ajax({
+                url: "books/" + dataId, //eksekusi ajax ke url ini
+                type: 'delete',
+                beforeSend: function () {
+                    $('#tombol-hapus').text('Hapus Data');
+                }, //set text untuk tombol hapus
+                success: function (data) { //jika sukses
+                    setTimeout(function () {
+                        $('#konfirmasi-modal').modal('hide'); //sembunyikan konfirmasi modal
+                        var oTable = $('#booking').dataTable();
+                        // $('#booking').DataTable().ajax.reload(null, false);
+                        oTable.fnDraw(false); //reset datatable
+                    });
+                    iziToast.warning({ //tampilkan izitoast warning
+                        title: 'Data Berhasil Dihapus',
+                        message: '{{ Session('
+                        delete ')}}',
+                        position: 'bottomRight'
+                    });
+                }
+            })
+        });
+
+
     });
 
-    //jika klik class delete (yang ada pada tombol delete) maka tampilkan modal konfirmasi hapus maka
-    $(document).on('click', '.delete', function () {
-        dataId = $(this).attr('id');
-        $('#konfirmasi-modal').modal('show');
-    });
-
-    //jika tombol hapus pada modal konfirmasi di klik maka
-    $('#tombol-hapus').click(function () {
-        $.ajax({
-            url: "books/" + dataId, //eksekusi ajax ke url ini
-            type: 'delete',
-            beforeSend: function () { $('#tombol-hapus').text('Hapus..');}, //set text untuk tombol hapus
-            success: function (data) { //jika sukses
-                setTimeout(function () {
-                    $('#konfirmasi-modal').modal('hide'); //sembunyikan konfirmasi modal
-                    var oTable = $('#booking').dataTable();
-                    $('#booking').DataTable().ajax.reload(null, false);
-                    oTable.fnDraw(false); //reset datatable
-                });
-                iziToast.warning({ //tampilkan izitoast warning
-                    title: 'Data Berhasil Dihapus',
-                    message: '{{ Session('
-                    delete ')}}',
-                    position: 'bottomRight'
-                });
-            }
-        })
-    });
 </script>
 
 @endpush

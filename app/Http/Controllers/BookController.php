@@ -129,11 +129,11 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        $book->delete();
+        $post = Book::where('id',$id)->delete();
 
-        return redirect()->route('books.index');
+        return response()->json($post);
     }
 
 
