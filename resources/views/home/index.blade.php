@@ -68,7 +68,7 @@
             <!-- Main content -->
             <section class="content">
                 <div class="card-body">
-                    <table id="data_table" class="table table-striped table-responsive">
+                    <table id="data_table" class="table table-bordered">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">No</th>

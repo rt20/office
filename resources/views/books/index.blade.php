@@ -69,7 +69,7 @@
                     <table id="booking" class="table table-bordered table-striped" style="width:100%">
                         <thead class="thead-light">
                             <tr>
-
+                                <th>No</th>
                                 <th>Tanggal Mulai</th>
                                 <th>Waktu Mulai</th>
                                 <th>Agenda</th>
@@ -197,10 +197,15 @@
                     data: {
                         from_date: from_date,
                         to_date: to_date
-                        // room: room
                     } //jangan lupa kirim parameter tanggal
                 },
                 columns: [{
+                        "data": "id",
+                        render: function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
                         data: 'date_start',
                         name: 'date_start'
                     },
@@ -265,7 +270,8 @@
                 }, //set text untuk tombol hapus
                 success: function (data) { //jika sukses
                     setTimeout(function () {
-                        $('#konfirmasi-modal').modal('hide'); //sembunyikan konfirmasi modal
+                        $('#konfirmasi-modal').modal(
+                            'hide'); //sembunyikan konfirmasi modal
                         var oTable = $('#booking').dataTable();
                         // $('#booking').DataTable().ajax.reload(null, false);
                         oTable.fnDraw(false); //reset datatable

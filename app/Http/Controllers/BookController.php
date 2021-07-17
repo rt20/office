@@ -40,9 +40,9 @@ class BookController extends Controller
             }
             return datatables()->of($book)
                         ->addColumn('action', function($data){
-                            $button = '<a href=" ./books/'.$data->id.'/edit" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
+                            $button = '<a href=" ./books/'.$data->id.'/edit" data-original-title="Edit" title="Ubah data" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
                             $button .= '&nbsp;&nbsp;';
-                            $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>';
+                            $button .= '<button type="button" name="delete" id="'.$data->id.'" title="Hapus data" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>';
                             return $button;
                         })
                         ->rawColumns(['action'])
