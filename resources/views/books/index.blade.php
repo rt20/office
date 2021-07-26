@@ -26,8 +26,6 @@
     <!-- Main content -->
     <section class="content">
         <div class="card">
-
-
             <div class="card-body">
                 <div class="row input-daterange">
                     <!-- <div class="col-sm-3">
@@ -65,25 +63,23 @@
                     </div>
 
                 </div>
-                <div class="card-body table-responsive" style="overflow-x:auto;">
-                    <table id="booking" class="table table-bordered table-striped" style="width:100%">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>No</th>
-                                <th>Tanggal Mulai</th>
-                                <th>Waktu Mulai</th>
-                                <th>Agenda</th>
-                                <th>Tanggal Selesai</th>
-                                <th>Waktu Selesai</th>
-                                <th>Ruangan</th>
-                                <th>Link</th>
-                                <th>PIC</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
+            </div>
+            <div class="card-body table-responsive" style="overflow-x:auto;">
+                <table id="booking" class="table table-bordered table-striped" style="width:100%">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Mulai</th>
+                            <th>Selesai</th>
+                            <th>Agenda</th>
+                            <th>Ruangan</th>
+                            <th>Link</th>
+                            <th>PIC</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
 
-                    </table>
-                </div>
+                </table>
             </div>
         </div>
         <!--/. container-fluid -->
@@ -116,10 +112,8 @@
 </div>
 
 <!-- AKHIR MODAL -->
-
-<!-- MULAI MODAL KONFIRMASI DELETE-->
-
 @endsection
+
 @push('after-script')
 
 <script>
@@ -210,20 +204,12 @@
                         name: 'date_start'
                     },
                     {
-                        data: 'time_start',
-                        name: 'time_start'
-                    },
-                    {
-                        data: 'agenda',
-                        name: 'agenda'
-                    },
-                    {
                         data: 'date_end',
                         name: 'date_end'
                     },
                     {
-                        data: 'time_end',
-                        name: 'time_end'
+                        data: 'agenda',
+                        name: 'agenda'
                     },
                     {
                         data: 'room',
@@ -249,9 +235,29 @@
                         name: 'action'
                     },
                 ],
-                order: [
-                    [0, 'desc']
-                ]
+                columnDefs: [{
+                        render: function (data, type, row) {
+                            return data + ' - ' + row['time_start'] + '';
+                        },
+                        "targets": 1
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return data + ' - ' + row['time_end'] + '';
+                        },
+                        "targets": 2
+                    },
+
+                ],
+                dom: 'Bfrtip',
+                lengthMenu: [ [ 10, 25, 50, 100, -1 ], [ '10', '25', '50', '100', 'Semua' ] ],
+                buttons: [
+                    'pageLength',
+                    { extend: 'csv', text: '<i class="fas fa-file-csv fa-1x"></i>'},
+                    { extend: 'excel', text: '<i class="fas fa-file-excel" aria-hidden="true"></i>' },
+                    { extend: 'pdf', text: '<i class="fas fa-file-pdf fa-1x" aria-hidden="true"></i>' },
+                    { extend: 'print', text: '<i class="fas fa-print" aria-hidden="true"></i>' },
+                ],
             });
         }
 

@@ -19,12 +19,20 @@ class Book extends Model
     }
 
      #konversi format waktu
-    //  public function getCreatedAtAttribute($value)
-    //  {
-    //      return Carbon::parse($value)->timestamp;
-    //  }
-    //  public function getUpdatedAtAttribute($value)
-    //  {
-    //      return Carbon::parse($value)->timestamp;
-    //  }
+     public function getDateStartAttribute(){
+        return Carbon::parse($this->attributes['date_start'])
+            ->translatedFormat('l, d F Y');
+    }
+    public function getDateEndAttribute(){
+        return Carbon::parse($this->attributes['date_end'])
+            ->translatedFormat('l, d F Y');
+    }
+    public function getTimeStartAttribute(){
+        return Carbon::parse($this->attributes['time_start'])
+            ->translatedFormat('H:i');
+    }
+    public function getTimeEndAttribute(){
+        return Carbon::parse($this->attributes['time_end'])
+            ->translatedFormat('H:i');
+    }
 }

@@ -26,17 +26,17 @@ class BookController extends Controller
                 //Jika tanggal awal(from_date) hingga tanggal akhir(to_date) adalah sama maka
                 if($request->from_date === $request->to_date){
                     //kita filter tanggalnya sesuai dengan request from_date
-                    $book = Book::whereDate('date_start','=', $request->from_date)->get();
+                    $book = Book::whereDate('date_start','=', $request->from_date)->orderBy('date_start', 'desc');
                 }
                 else{
                     //kita filter dari tanggal awal ke akhir
-                    $book = Book::whereBetween('date_start', array($request->from_date, $request->to_date))->get();
+                    $book = Book::whereBetween('date_start', array($request->from_date, $request->to_date))->orderBy('date_start', 'desc');
                 }
             }
             //load data default
             else
             {
-                $book = Book::all();
+                $book = Book::orderBy('date_start', 'desc');
             }
             return datatables()->of($book)
                         ->addColumn('action', function($data){

@@ -84,10 +84,8 @@
                             @forelse($book as $item)
                             <tr>
                                 <td>{{ ($book->currentPage()-1) * $book->perPage()+$loop->index+1 }}</td>
-                                <td>{{ date('d M y', strtotime($item->date_start))}} -
-                                    {{date('H:i', strtotime($item->time_start))}}</td>
-                                <td>{{ date('d M y', strtotime($item->date_end))}} -
-                                    {{date('H:i', strtotime($item->time_end))}}</td>
+                                <td>{{$item->date_start}} - {{$item->time_start}} </td>
+                                <td>{{$item->date_end}} - {{$item->time_end}} </td>
                                 <td>{{ $item->agenda }}</td>
                                 <td>{{ $item->room }}</td>
                                 <td>{{ $item->pic }}</td>

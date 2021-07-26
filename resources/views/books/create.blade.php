@@ -56,7 +56,7 @@
                             <div class="col-sm-9">
                                 <input value="{{ old('pic') }}" name="pic"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Nama Penanggung Jawab">
+                                    id="pic" type="text" placeholder="Nama Penanggung Jawab">
                             </div><br>
                         </div>
                         </br>
@@ -67,7 +67,7 @@
                             <div class="col-sm-10">
                                 <select name="room"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" style="width: 40%;" required>
+                                    id="room" type="text" style="width: 40%;" required>
                                     <option value="">- Pilih Ruangan Daring/Luring</option>
                                     <option value="Zoom Meeting 1 (ditwas.prrs)">Zoom Meeting 1 (ditwas.prrs)</option>
                                     <option value="Zoom Meeting 2 (inspeksisedang.btp)">Zoom Meeting 2
@@ -86,7 +86,7 @@
                             <div class="col-sm-9">
                                 <input value="{{ old('agenda') }}" name="agenda"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Agenda">
+                                    id="agenda" type="text" placeholder="Agenda">
                             </div><br>
                         </div></br>
                         <div class="row">
@@ -96,7 +96,7 @@
                             <div class="col-sm-9">
                                 <input value="{{ old('participant') }}" name="participant"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Peserta">
+                                    id="participant" type="text" placeholder="Peserta">
                             </div></br>
                         </div>
                         <br>
@@ -107,7 +107,7 @@
                             <div class="col-sm-3">
                                 <input value="{{ old('quantity') }}" name="quantity"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Jumlah Peserta">
+                                    id="quantity" type="text" placeholder="Jumlah Peserta">
                             </div>
                         </div>
                         <br>
@@ -117,18 +117,13 @@
                             </div>
                             <div class="col-sm-3">
 
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt"></i>
-                                    </span>
+                               
 
-                                    <input type="text" name="date_start" id="date_start" readonly
+                                    <input type="date" name="date_start" id="date_start" readonly
                                         class="form-control datepicker appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         style="width: 100%;" value="{{old('date_start')}}" placeholder="Waktu mulai"
                                         required>
-                                </div>
-
-
+                               
 
                             </div>
                             <div class="col-sm-1">
@@ -153,15 +148,12 @@
                             <div class="col-sm-3">
 
 
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt"></i>
-                                    </span>
-                                    <input type="text" name="date_end" id="date_end" readonly
+                                
+                                    <input type="date" name="date_end" id="date_end" readonly
                                         class="form-control datepicker appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         style="width: 100%;" value="{{old('selesai')}}" placeholder="Waktu selesai"
                                         required>
-                                </div>
+                                
 
 
                             </div>
@@ -186,7 +178,7 @@
                             <div class="col-sm-3">
                                 <input value="{{ old('meetingid') }}" name="meetingid"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Meeting ID">
+                                    id="meetingid" type="text" placeholder="Meeting ID">
                             </div>
                             <div class="col-sm-1">
 
@@ -197,7 +189,7 @@
                             <div class="col-sm-3">
                                 <input value="{{ old('password') }}" name="password"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Passcode">
+                                    id="password" type="text" placeholder="Passcode">
                             </div>
                         </div>
                         <br>
@@ -208,7 +200,7 @@
                             <div class="col-sm-9">
                                 <input value="{{ old('link') }}" name="link"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text"
+                                    id="link" type="text"
                                     placeholder="Link Zoom / Google Meet / Video Conference">
                             </div></br>
                         </div>

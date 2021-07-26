@@ -17,21 +17,23 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- datatables -->
 
+<script type="text/javascript" language="javascript" src="{{ asset('dist/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" language="javascript" src="{{ asset('dist/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{ asset('dist/plugins/datatables-buttons/js/buttons.html5.min.js') }}"> </script>
 <script src="{{ asset('dist/plugins/datatables-buttons/js/buttons.print.min.js') }}"> </script>
-<!-- <script src="{{ asset('js/jszip.min.js')}}"> </script>
-<script src="{{ asset('js/pdfmake.min.js')}}"> </script>
-<script src="{{ asset('js/vfs_fonts.js')}}"> </script> -->
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 
 <!-- <script type="text/javascript" language="javascript" src="{{ asset('js/jquery/jquery-3.5.1.js')}}"></script> -->
-<script type="text/javascript" language="javascript"
-    src="{{ asset('dist/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" language="javascript"
-    src="{{ asset('dist/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+
 
 <!-- notif kecil dibawah -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
-        integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
+    integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
 
 
 
@@ -51,6 +53,7 @@
 
         return false;
     })
+
 </script>
 
 
@@ -70,10 +73,12 @@
             }
         });
     });
+
 </script>
 
 <script>
     $(document).ready(function () {
         $('#example').DataTable();
     });
+
 </script>

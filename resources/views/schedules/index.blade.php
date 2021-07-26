@@ -2,31 +2,31 @@
 
 @section('title','Jadwal Kegiatan')
 
-@section('content')   
+@section('content')
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-  @include ('flash::message')
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    @include ('flash::message')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Jadwal Kegiatan</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-              <li class="breadcrumb-item active">Jadwal</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Jadwal Kegiatan</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Jadwal</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
-    <div class="card">
+        <div class="card">
             <div class="card-body">
                 <div class="row input-daterange">
                     <div class="col-sm-2">
@@ -51,38 +51,31 @@
                 </div>
             </div>
             <!-- AKHIR DATE RANGE PICKER -->
-
-            <div class="card-body">
-
                 <div class="card-body table-responsive" style="overflow-x:auto;">
-                <table id="schedule" class="table-auto table-striped table-bordered w-full">
-                    <thead>
-                    <tr>
-                        <th>Hari, Tanggal</th>
-                        <th>Waktu</th>
-                        <th>Agenda</th>
-                        <th>Lokasi</th>
-                        <th>Penyelenggara</th>
-                        <th>Peserta</th>
-                        <th>Lampiran</th>
-                        <th>Keterangan</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
+                    <table id="schedule" class="table-auto table-striped table-bordered w-full">
+                        <thead>
+                            <tr>
+                                <th>Hari, Tanggal</th>
+                                <th>Waktu</th>
+                                <th>Agenda</th>
+                                <th>Lokasi</th>
+                                <th>Penyelenggara</th>
+                                <th>Peserta</th>
+                                <th>Lampiran</th>
+                                <th>Keterangan</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
         </div>
-    
-
-
-
-      </div><!--/. container-fluid -->
+        <!--/. container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
+</div>
+<!-- /.content-wrapper -->
 @endsection
+
 @push('after-script')
 <!-- menu schedule -->
 <script>
@@ -101,7 +94,7 @@
             todayBtn: 'linked',
             format: 'yyyy-mm-dd',
             autoclose: true
-        }); 
+        });
         $('#filter').click(function () {
             var from_date = $('#from_date').val();
             var to_date = $('#to_date').val();
@@ -136,8 +129,8 @@
         //LOAD DATATABLE
         //script untuk memanggil data json dari server dan menampilkannya berupa datatable
         //load data menggunakan parameter tanggal dari dan tanggal hingga
-       
-        function load_data (from_date = '', to_date = '') {
+
+        function load_data(from_date = '', to_date = '') {
             $('#schedule').DataTable({
                 processing: true,
                 serverSide: true, //aktifkan server-side 
@@ -176,16 +169,16 @@
                         name: 'participant'
                     },
                     {
-                            data: 'attachment',
-                            name: 'attachment',
-                            render: function ( data, type, row, meta ) {
-                                if (data == null) {
-                                        return '';
-                                        }
-                                    else {
-                                        return '<a href='+ data +'><i class="fa fa-download"></i></a>';
-                                        }
+                        data: 'attachment',
+                        name: 'attachment',
+                        render: function (data, type, row, meta) {
+                            if (data == null) {
+                                return '';
+                            } else {
+                                return '<a href=' + data +
+                                '><i class="fa fa-download"></i></a>';
                             }
+                        }
                     },
                     {
                         data: 'note',
@@ -225,11 +218,13 @@
                 });
                 iziToast.warning({ //tampilkan izitoast warning
                     title: 'Data Berhasil Dihapus',
-                    message: '{{ Session('delete ')}}',
+                    message: '{{ Session('
+                    delete ')}}',
                     position: 'bottomRight'
                 });
             }
         })
     });
+
 </script>
 @endpush

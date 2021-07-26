@@ -68,7 +68,6 @@
                         <tbody>
                             @forelse($borrow as $a)
                             <tr>
-
                                 <td>{{ $a->borrower }}</td>
                                 <td>{{ $a->item->item }}</td>
                                 <td>{{ $a->item->merk }}</td>
@@ -87,14 +86,14 @@
                                             </span>
                                 </td>
                                 <td align="right">
-                                    
+
                                             @if($a->status == 'DIPINJAM')
                                             <a href="{{ route('borrow.status', $a->id ) }}?status=KEMBALI"
                                                 class="btn btn-success btn-sm">
                                                 <i class="fa fa-check"></i>
                                             </a>
                                             @endif
-                                        
+
                                             <form action="{{ route('borrows.destroy', $a->id) }}" method="post"
                                                 class="d-inline" title="Hapus">
                                                 @csrf
@@ -104,7 +103,7 @@
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
-                                       
+
                                 </td>
                             </tr>
                             @empty
