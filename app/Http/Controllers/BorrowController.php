@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Borrow;
 use App\Models\Item;
 use DB;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -80,8 +81,11 @@ class BorrowController extends Controller
      */
     public function edit(Borrow $borrow)
     {
+        $items = Item::all();
+
         return view('borrows.edit',[
-            'item' => $borrow
+            'borrow' => $borrow,
+            'items' => $items
         ]);
     }
 
@@ -116,12 +120,13 @@ class BorrowController extends Controller
     public function setStatus (Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:DIPINJAM,KEMBALI'
+            'status' => 'required|in:DIPINJAM,KEMBALI',
         ]);
 
         $item = Borrow::findOrFail($id);
         $item->status = $request->status;
-
+        $item->end = Carbon::now();
+// dd($item->end);
         $item->save();
        
         return redirect()->route('borrows.index');

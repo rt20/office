@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Peminjaman Barang')
+@section('title','Edit Peminjaman Barang')
 
 @section('content')
 
@@ -11,19 +11,18 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Peminjaman Barang</h1>
+                    <h1>Edit Peminjaman Barang</h1>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('borrows.index') }}">Peminjaman Barang</a></li>
+                <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard/borrows">Peminjaman Barang</a></li>
                         <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="py-12">
@@ -46,7 +45,7 @@
                         </div>
                     </div>
                     @endif
-                    <form class="w-full" action="{{ route('borrows.update',$item->id) }}" method="post"
+                    <form class="w-full" action="{{ route('borrows.update',$borrow->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -55,7 +54,7 @@
                                 Nama Peminjam*
                             </div>
                             <div class="col-sm-9">
-                                <input value="{{ old('borrower') ?? $item->borrower }}" name="borrower"
+                                <input value="{{ old('borrower') ?? $borrow->borrower }}" name="borrower"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" placeholder="Nama Peminjam">
                             </div><br>
@@ -67,9 +66,17 @@
                                 Nama Barang*
                             </div>
                             <div class="col-sm-9">
-                                <input value="{{ old('item') ?? $item->item }}" name="item"
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-last-name" type="text" placeholder="Nama Barang">
+
+                            <select name="item_id" 
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
+                                    <option value="{{ old('item_id')?? $borrow->item_id  }}">{{ old('item_id')?? $borrow->item_id  }}</option>
+                                    @foreach($items ?? '' as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ old('item_id') == $item->id ? 'selected' : null }}>
+                                        {{ $item->code }}.{{ $item->nup }} | {{ $item->item }} | {{ $item->tahun_perolehan }} | {{ $item->merk }}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div><br>
                         </div>
                         </br>
@@ -78,7 +85,7 @@
                                 Merk
                             </div>
                             <div class="col-sm-3">
-                                <input value="{{ old('merk')?? $item->merk  }}" name="merk"
+                                <input value="{{ old('merk')?? $borrow->merk  }}" name="merk"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" placeholder="Merk">
                             </div></br>
@@ -89,7 +96,7 @@
                                 Kode BMN
                             </div>
                             <div class="col-sm-3">
-                                <input value="{{ old('code') ?? $item->code }}" name="code"
+                                <input value="{{ old('code') ?? $borrow->code }}" name="code"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" placeholder="Kode BMN">
                             </div>
@@ -102,7 +109,7 @@
                             <div class="col-sm-3">
                                 <input type="date" name="start"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('start') ?? $item->start }}">
+                                    style="width: 100%;" value="{{old('start') ?? $borrow->start }}">
                             </div>
                             <div class="col-sm-1">
 
@@ -113,7 +120,7 @@
                             <div class="col-sm-3">
                                 <input type="date" name="end"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    style="width: 100%;" value="{{old('end')?? $item->end }}">
+                                    style="width: 100%;" value="{{old('end')?? $borrow->end }}">
                             </div>
                         </div>
                         <br>
@@ -122,7 +129,7 @@
                                 Agenda*
                             </div>
                             <div class="col-sm-9">
-                                <input value="{{ old('agenda')?? $item->agenda }}" name="agenda"
+                                <input value="{{ old('agenda')?? $borrow->agenda }}" name="agenda"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text" placeholder="Agenda">
                             </div></br>
@@ -147,3 +154,15 @@
 <!-- /.content-wrapper -->
 
 @endsection
+@push('after-script')
+<!-- select2 di create borrow -->
+<script>
+    $('#selectbarang').select2({
+        placeholder: 'Pilih Barang',
+        allowClear: true,
+    });
+    $(document).ready(function () {
+
+    });
+</script>
+@endpush

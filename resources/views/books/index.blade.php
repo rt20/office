@@ -260,7 +260,6 @@
                 ],
             });
         }
-
         //jika klik class delete (yang ada pada tombol delete) maka tampilkan modal konfirmasi hapus maka
         $(document).on('click', '.delete', function () {
             dataId = $(this).attr('id');

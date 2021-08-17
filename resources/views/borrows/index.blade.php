@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item active">Peminjaman Barang</li>
                     </ol>
                 </div>
@@ -51,10 +51,10 @@
             <!-- AKHIR DATE RANGE PICKER -->
             <div class="card-body">
                 <div class="card-body table-responsive p-0" style="overflow-x:auto;">
-                    <table id="example" class="table table-striped table-bordered table-sm">
+                    <table id="pinjam" class="table table-striped table-bordered table-sm">
                         <thead>
                             <tr>
-
+                            <th>No</th>
                                 <th>Peminjam</th>
                                 <th>Nama Barang</th>
                                 <th>Merk</th>
@@ -68,12 +68,17 @@
                         <tbody>
                             @forelse($borrow as $a)
                             <tr>
+                            <th>{{ $loop->index +1 }}</th>
                                 <td>{{ $a->borrower }}</td>
                                 <td>{{ $a->item->item }}</td>
                                 <td>{{ $a->item->merk }}</td>
                                 <td>{{ $a->agenda }}</td>
                                 <td>{{ date('d M y', strtotime($a->start)) }}</td>
+                                @if($a->end == '')
+                                <td>-</td>
+                                @else($a->status !== '')
                                 <td>{{ date('d M y', strtotime($a->end)) }}</td>
+                                @endif
                                 <td>
                                     @if($a->status == 'DIPINJAM')
                                     <span class="badge badge-danger">
@@ -87,23 +92,23 @@
                                 </td>
                                 <td align="right">
 
-                                            @if($a->status == 'DIPINJAM')
-                                            <a href="{{ route('borrow.status', $a->id ) }}?status=KEMBALI"
-                                                class="btn btn-success btn-sm">
-                                                <i class="fa fa-check"></i>
-                                            </a>
-                                            @endif
-
-                                            <form action="{{ route('borrows.destroy', $a->id) }}" method="post"
-                                                class="d-inline" title="Hapus">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm "
-                                                    onclick="return confirm('Apakah anda yakin ?')">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
-
+                                    @if($a->status == 'DIPINJAM')
+                                    <a href="{{ route('borrow.status', $a->id ) }}?status=KEMBALI"
+                                        class="btn btn-success btn-sm">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                    @endif
+                                    @if(Auth::user()->roles == 'ADMIN')
+                                    <form action="{{ route('borrows.destroy', $a->id) }}" method="post" class="d-inline"
+                                        title="Hapus">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger btn-sm "
+                                            onclick="return confirm('Apakah anda yakin ?')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                    @endif
                                 </td>
                             </tr>
                             @empty
@@ -125,3 +130,11 @@
 <!-- /.content-wrapper -->
 
 @endsection
+@push('after-script')
+<script>
+    $(document).ready(function () {
+        $('#pinjam').DataTable();
+    });
+
+</script>
+@endpush

@@ -67,7 +67,7 @@
 
             <!-- Main content -->
             <section class="content">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table id="data_table" class="table table-bordered">
                         <thead class="thead-light">
                             <tr>

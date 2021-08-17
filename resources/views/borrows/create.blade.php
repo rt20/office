@@ -93,7 +93,7 @@
 
                             </div>
                             <div class="col-sm-2">
-                                Tanggal Selesai*
+                                Tanggal Selesai
                             </div>
                             <div class="col-sm-3">
                                 <input type="text" name="end" id="date_end" readonly placeholder="Tanggal selesai"

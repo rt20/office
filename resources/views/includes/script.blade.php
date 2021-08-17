@@ -11,10 +11,7 @@
 <script src="{{ mix('js/app.js') }}" defer></script>
 <!-- select2 -->
 <script src="{{ asset('dist/plugins/select2/js/select2.min.js') }}"></script>
-<!-- datepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-    integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- datatables -->
 
 <script type="text/javascript" language="javascript" src="{{ asset('dist/plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -35,7 +32,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
     integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
 
-
+    <!-- datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 <!-- waktu mulai kurang dari waktu akhir -->
@@ -63,22 +63,17 @@
         $(".datepicker").datepicker({
             format: 'yyyy-mm-dd',
             autoclose: true,
-            todayHighlight: true,
+            todayHighlight: true, 
         });
         $("#date_start").on('changeDate', function (selected) {
             var startDate = new Date(selected.date.valueOf());
             $("#date_end").datepicker('setStartDate', startDate);
             if ($("#date_start").val() > $("#date_end").val()) {
-                $("#date_end").val($("#date_start").val());
+                $("#date_end").val($("").val());
             }
         });
     });
 
 </script>
 
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
 
-</script>

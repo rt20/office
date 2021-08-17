@@ -52,7 +52,6 @@ class BookController extends Controller
         return view('books.index');
 
     }
-
     /**
      * Show the form for creating a new resource.
      *

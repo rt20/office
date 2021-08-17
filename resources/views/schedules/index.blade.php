@@ -133,16 +133,16 @@
         function load_data(from_date = '', to_date = '') {
             $('#schedule').DataTable({
                 processing: true,
-                serverSide: true, //aktifkan server-side 
+                serverSide: true, //aktifkan server-side
                 ajax: {
                     url: "{{ route('schedules.index') }}",
                     // url: "{{ url('/dashboard/schedules') }}",
-                    // url: "https://office.balok.id/dashboard/schedules", 
+                    // url: "https://office.balok.id/dashboard/schedules",
                     type: 'GET',
                     data: {
                         from_date: from_date,
                         to_date: to_date
-                    } //jangan lupa kirim parameter tanggal 
+                    } //jangan lupa kirim parameter tanggal
                 },
                 columns: [{
                         data: 'date_start',
