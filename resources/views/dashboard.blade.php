@@ -118,14 +118,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($borrow as $p) 
+                             
                                 <tr> 
                                   
                                     <td>
                                         Data Tidak Ditemukan
                                     </td>
                                 </tr>
-                                @endforelse
+                                
                                 </tbody>
                             </table>
                         </div>
