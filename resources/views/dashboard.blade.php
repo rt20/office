@@ -120,33 +120,7 @@
                             <tbody>
                                 @forelse($borrow as $p) 
                                 <tr> 
-                                    <td>
-                                        {{ ($borrow->currentPage()-1) * $borrow->perPage()+$loop->index+1 }}
-                                    </td>
-                                    <td ">{{ $p->borrower }}</td>
-                                <td>{{ $p->item->item }}</td>
-                                <td>{{ $p->item->merk }}</td>
-                                <td>{{ date('d F y', strtotime($p->start)) }}</td>
-                                @if($p->end == '')
-                                <td>-</td>
-                                @else($p->status !== '')
-                                <td>{{ date('d F y', strtotime($p->end)) }}</td>
-                                @endif
-                                <td>{{ $p->agenda }}</td>
-                                <td>
-                                    @if($p->status == 'DIPINJAM')
-                                    <span class="badge badge-danger">
-                                        @elseif($p->status == 'KEMBALI')
-                                        <span class="badge badge-success">
-                                            @else
-                                            <span>
-                                                @endif
-                                                {{ $p->status }}
-                                            </span>
-                                </td>
-                                </tr>
-                                @empty
-                                <tr>
+                                  
                                     <td>
                                         Data Tidak Ditemukan
                                     </td>
