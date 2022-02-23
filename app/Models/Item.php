@@ -10,12 +10,12 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'item', 'tahun_perolehan', 'nup',  'merk','kondisi'
+        'code', 'nama', 'tahun_perolehan', 'nup',  'merk','kondisi'
         
     ];
 
-    public function borrow()
+    public function borrows()
 	{
-		return $this->hasMany(Borrow::class, 'item_id');
+		return $this->hasMany('App\Borrows');
 	}
 }

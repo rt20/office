@@ -54,7 +54,7 @@
                     <table id="pinjam" class="table table-striped table-bordered table-sm">
                         <thead>
                             <tr>
-                            <th>No</th>
+                                <th>No</th>
                                 <th>Peminjam</th>
                                 <th>Nama Barang</th>
                                 <th>Merk</th>
@@ -66,12 +66,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($borrow as $a)
+                            @forelse($data as $a)
                             <tr>
-                            <th>{{ $loop->index +1 }}</th>
+                                <th>{{ $loop->index +1 }}</th>
                                 <td>{{ $a->borrower }}</td>
-                                <td>{{ $a->item->item }}</td>
-                                <td>{{ $a->item->merk }}</td>
+                                <td>{{ $a->item }}</td>
+                                <td>{{ $a->merk }}</td>
                                 <td>{{ $a->agenda }}</td>
                                 <td>{{ date('d M y', strtotime($a->start)) }}</td>
                                 @if($a->end == '')
@@ -135,6 +135,5 @@
     $(document).ready(function () {
         $('#pinjam').DataTable();
     });
-
 </script>
 @endpush

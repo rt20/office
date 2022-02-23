@@ -18,16 +18,12 @@ class BorrowController extends Controller
      */
     public function index(Request $request)
     {
-        $items = Item::paginate(10);
-        
-        $borrow = Borrow::orderBy('start', 'desc')->get();
-        // $borrow = Borrow::where('status', 'KEMBALI')->get();
-        
-
-        return view('borrows.index', [
-            'borrow' => $borrow,
-            'items' => $items
-        ]);
+        #$items = Item::all(); 
+        $data = DB::table('items')
+                ->join('borrows','items.id','=','borrows.item_id')
+                ->paginate(10);
+    
+        return view('borrows.index', compact('data'));
     }
 
     /**
@@ -39,8 +35,9 @@ class BorrowController extends Controller
     {
         
         // menampilkan barang yang tersedia
-        $items = DB::select('SELECT * from items WHERE id NOT IN (SELECT item_id from borrows where status ="DIPINJAM")');
-
+        $items = DB::select('SELECT * from items WHERE id NOT IN (SELECT item_id from borrows where status ="DIPINJAM")')
+                ->all();
+dd($items);
 
         return view('borrows.create', [
             'items' => $items
