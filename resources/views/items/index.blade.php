@@ -71,12 +71,14 @@
                                     <a href="{{ route('items.edit', $data->id) }}" class="btn btn-success btn-sm" title="Ubah">
                                     <i class="fa fa-edit"></i>
                                     </a>
+                                    @if(Auth::user()->roles == 'SUPER')
                                     <form action="{{ route('items.destroy', $data->id) }}" method="POST" class="d-inline" title="Hapus">
                                         {!! method_field('delete') . csrf_field() !!}
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ?')">
                                         <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

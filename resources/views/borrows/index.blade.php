@@ -121,8 +121,11 @@
                         </tbody>
                     </table>
                 </div>
+                
             </div>
+            {!! $data->render() !!}
         </div>
+        
         <!--/. container-fluid -->
     </section>
     <!-- /.content -->
@@ -130,10 +133,4 @@
 <!-- /.content-wrapper -->
 
 @endsection
-@push('after-script')
-<script>
-    $(document).ready(function () {
-        $('#pinjam').DataTable();
-    });
-</script>
-@endpush
+
