@@ -96,38 +96,11 @@
 
                 <!-- TABLE: LATEST BOOKING -->
                 <div class="card">
-                    <div class="card-header border-transparent">
-                        <h3 class="card-title">Peminjaman Barang</h3>
-
-
-                    </div>
+                   
                     <!-- /.card-header -->
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-sm"">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Peminjam</th>
-                                    <th>Nama Barang</th>
-                                    <th>Merk</th>
-                                    <th>Mulai</th>
-                                    <th>Selesai</th>
-                                    <th>Agenda</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             
-                                <tr> 
-                                  
-                                    <td>
-                                        Data Tidak Ditemukan
-                                    </td>
-                                </tr>
-                                
-                                </tbody>
-                            </table>
+                           
                         </div>
                         <!-- /.table-responsive -->
                     </div>
