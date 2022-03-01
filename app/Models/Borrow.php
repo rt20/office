@@ -11,6 +11,10 @@ class Borrow extends Model
     use HasFactory, softDeletes;
 
     protected $guarded = [];
+    protected $casts = [
+		'item' => 'array'
+		
+    ];
 
     public function item()
 	{

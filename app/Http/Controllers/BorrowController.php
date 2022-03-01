@@ -36,9 +36,9 @@ class BorrowController extends Controller
     {
         
         // menampilkan barang yang tersedia
-        $items = DB::select('SELECT * from items WHERE id NOT IN (SELECT item_id from borrows where status ="DIPINJAM")')
-                ->all();
-
+        $items = DB::select('SELECT * from items WHERE id NOT IN (SELECT item_id from borrows where status ="DIPINJAM")');
+                // ->all();
+// dd($items);
 
         return view('borrows.create', [
             'items' => $items
