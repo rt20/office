@@ -76,7 +76,7 @@
                                 <td>{{ date('d M y', strtotime($a->start)) }}</td>
                                 @if($a->end == '')
                                 <td>-</td>
-                                @else($a->status !== '')
+                                @else ($a->status !== '')
                                 <td>{{ date('d M y', strtotime($a->end)) }}</td>
                                 @endif
                                 <td>
