@@ -79,17 +79,23 @@
                                 @else ($a->status !== '')
                                 <td>{{ date('d M y', strtotime($a->end)) }}</td>
                                 @endif
+
+                              
+
+
                                 <td>
-                                    @if($a->status == 'DIPINJAM')
-                                    <span class="badge badge-danger">
-                                        @elseif($a->status == 'KEMBALI')
-                                        <span class="badge badge-success">
-                                            @else
-                                            <span>
+                                
+                                @if(($a->start > $now)) 
+                                <span class="badge badge-warning"> RENCANA </span>
+                                    @elseif ($a->status == 'DIPINJAM') 
+                                    <span class="badge badge-danger"> DIPINJAM </span>
+                                        @elseif ($a->status == 'KEMBALI')
+                                        <span class="badge badge-success"> KEMBALI  </span>
+                                           @else
                                                 @endif
-                                                {{($a->status)}}
-                                            </span>
+                                               
                                 </td>
+                               
                                 <td align="right">
 
                                     @if($a->status == 'DIPINJAM')
@@ -108,6 +114,7 @@
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
+                                    @elseif(Auth::user()->id == 'ADMIN')
                                     @endif
                                 </td>
                             </tr>

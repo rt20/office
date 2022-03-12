@@ -23,8 +23,10 @@ class BorrowController extends Controller
                 ->join('borrows','items.id','=','borrows.item_id')
                 ->orderBy('start', 'desc')
                 ->paginate(10);
+
+        $now = Carbon::now();
     // dd($data);
-        return view('borrows.index', compact('data'));
+        return view('borrows.index', compact('data','now'));
     }
 
     /**
