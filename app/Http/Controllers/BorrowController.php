@@ -22,7 +22,7 @@ class BorrowController extends Controller
         $data = DB::table('items')
                 ->join('borrows','items.id','=','borrows.item_id')
                 ->orderBy('start', 'desc')
-                ->paginate(10);
+                ->get();
 
         $now = Carbon::now();
     // dd($data);
@@ -126,7 +126,7 @@ class BorrowController extends Controller
         $item = Borrow::findOrFail($id);
         $item->status = $request->status;
         $item->end = Carbon::now();
-// dd($item->end);
+
         $item->save();
        
         return redirect()->route('borrows.index');

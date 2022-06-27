@@ -28,16 +28,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row input-daterange">
-                    <!-- <div class="col-sm-3">
-                        <select name="room" class="form-control" id="room-filter" type="text">
-                            <option value="">Semua Ruangan</option>
-                            <option value="Zoom Meeting 1 (ditwas.prrs)">Zoom Meeting 1 (ditwas.prrs)</option>
-                            <option value="Zoom Meeting 2 (inspeksisedang.btp)">Zoom Meeting 2 (inspeksisedang.btp)
-                            </option>
-                            <option value="Zoom Meeting 3 (peredaranpangan)">Zoom Meeting 3 (peredaranpangan)</option>
-                            <option value="Ruang Rapat Wasdar">Ruang Rapat Wasdar</option>
-                        </select>
-                    </div> -->
+                   
                     <div class="col-sm-2">
                         <input type="text" name="from_date" id="from_date" class="form-control" placeholder="Tgl Awal"
                             readonly />
@@ -295,5 +286,13 @@
     });
 
 </script>
+<!-- notif kecil dibawah -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
+    integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
+@endpush
 
+@push('after-style')
+<!-- notif kecil dibawah -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+        integrity="sha256-pODNVtK3uOhL8FUNWWvFQK0QoQoV3YA9wGGng6mbZ0E=" crossorigin="anonymous" />
 @endpush

@@ -72,6 +72,15 @@
            
           </li>
           <li class="nav-item has-treeview">
+            <a href="{{ route('mutasi.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-file"></i>
+              <p>
+                Mutasi Barang
+              </p>
+            </a>
+           
+          </li>
+          <li class="nav-item has-treeview">
             <a href="{{ route('schedules.index') }}" class="nav-link">
               <i class="nav-icon fas fa-calendar"></i>
               <p>

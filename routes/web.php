@@ -7,6 +7,7 @@ use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\MutasiController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,7 +33,9 @@ Route::prefix('dashboard')
         Route::resource('borrows', BorrowController::class);
         Route::resource('items', ItemController::class);
         Route::resource('schedules', ScheduleController::class);
-
+        Route::resource('mutasi', MutasiController::class);
+        Route::get('/addmutasi', 'App\Http\Controllers\MutasiController@addmutasi')->name('mutasi.addmutasi');
+        Route::post('/storeAddMutasi', 'MutasiController@storeAddMutasi')->name('mutasi.storeAddMutasi');
         
         Route::post('item/import', [ItemController::class,'import'])->name('item.import');  
     });

@@ -51,7 +51,7 @@
             <!-- AKHIR DATE RANGE PICKER -->
             <div class="card-body">
                 <div class="card-body table-responsive p-0" style="overflow-x:auto;">
-                    <table id="pinjam" class="table table-striped table-bordered table-sm">
+                    <table id="datatablesSimple" class="table table-striped table-bordered table-sm">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -130,7 +130,7 @@
                 </div>
                 
             </div>
-            {!! $data->render() !!}
+         
         </div>
         
         <!--/. container-fluid -->
@@ -140,4 +140,11 @@
 <!-- /.content-wrapper -->
 
 @endsection
-
+@push('after-script')
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="{{ asset("./dist/js/datatables-simple-demo.js") }}"></script>
+@endpush
+@push('after-style')
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="{{ asset("/dist/css/styles.css") }}" rel="stylesheet" />
+@endpush

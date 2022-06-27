@@ -43,7 +43,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
+        // dd($data);
         Item::create($data);
 
         return redirect()->route('items.index');
