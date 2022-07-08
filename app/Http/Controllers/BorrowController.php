@@ -25,7 +25,7 @@ class BorrowController extends Controller
                 ->get();
 
         $now = Carbon::now();
-    // dd($data);
+  
         return view('borrows.index', compact('data','now'));
     }
 
