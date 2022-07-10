@@ -18,7 +18,7 @@
                   <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                @guest
-                  <a href="{{ url('login') }}" title="Login e-Office">
+                  <a href="{{ route('login') }}" title="Login e-Office">
                       <div class="info-box bg-info">
 
                           <span class="info-box-icon"><i class="fas fa-user-shield"></i></span>
