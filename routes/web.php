@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class, 'index'])->name('home');
 
 //Dashboard
-Route::prefix('/dashboard')
+Route::prefix('./dashboard')
     ->middleware(['auth:sanctum'])
     ->group(function(){
         Route::get('/',[DashboardController::class,'index'])->name('dashboard');
