@@ -142,7 +142,7 @@ return [
     |
     */
 
-    'path' => 'https://peredaranpangan.pom.go.id/office/',
+    'path' => '/office',
 
     /*
     |--------------------------------------------------------------------------
