@@ -8,7 +8,7 @@
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 
 <!-- Scripts -->
-<script src="{{ asset('/js/app.js') }}" defer></script>
+<script src="{{ mix('js/app.js') }}" defer></script>
 <!-- select2 -->
 <script src="{{ asset('dist/plugins/select2/js/select2.min.js') }}"></script>
 
