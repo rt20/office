@@ -175,7 +175,7 @@
                 processing: true,
                 serverSide: true, //aktifkan server-side
                 ajax: {
-                    url: "{{ route('books.index') }}",
+                    url: "{{ URL::route('books.index') }}",
                     // url: "{{ url('/dashboard/books') }}",
                     // url: "https://office.balok.id/dashboard/books",
                     type: 'GET',
@@ -213,7 +213,7 @@
                             if (data == null) {
                                 return '';
                             } else {
-                                return '<a href=https://' + data + '><i class="fa fa-link"></i></a>';
+                                return '<a href=' + data + '><i class="fa fa-link"></i></a>';
                             }
                         }
                     },
