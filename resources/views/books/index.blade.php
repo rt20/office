@@ -213,7 +213,7 @@
                             if (data == null) {
                                 return '';
                             } else {
-                                return '<a href=' + data + '><i class="fa fa-link"></i></a>';
+                                return '<a href=https://' + data + '><i class="fa fa-link"></i></a>';
                             }
                         }
                     },
