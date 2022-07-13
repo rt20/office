@@ -32,7 +32,7 @@
                   </a>
                   @endguest
                   @auth
-                  <a href="/dashboard" title="Login e-Office">
+                  <a href="./dashboard" title="Login e-Office">
                       <div class="info-box bg-info">
 
                           <span class="info-box-icon"><i class="fas fa-tachometer-alt"></i></span>
