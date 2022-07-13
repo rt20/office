@@ -5,7 +5,7 @@
          <link rel="stylesheet" href="{{ asset('dist/plugins/fontawesome-free/css/all.min.css') }}">
 
 <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('./office/css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
 <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
