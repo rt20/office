@@ -71,13 +71,14 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
+//$data = $request->except(['_token', '_method' ]);
+//dd($data);
         Book::create($data);
 
     //    kirim email ke user
-        Mail::to('kaploks@gmail.com')->send(
-            new BookSuccess($data)
-        );
+    //    Mail::to('kaploks@gmail.com')->send(
+      //      new BookSuccess($data)
+     //   );
 
         return redirect()->route('books.index');
     }

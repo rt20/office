@@ -16,13 +16,11 @@ class MutasiController extends Controller
      */
     public function index()
     {
-        // $mutasi = Mutasi::orderBy('id', 'desc')->paginate(10);
-
         $data = DB::table('items')
                 ->join('mutasis','items.id','=','mutasis.item_id')
-                // ->orderBy('id', 'desc')
-                ->get();
-                // dd($data);
+                ->orderBy('tgl_mutasi', 'desc')
+                ->paginate(10);
+                #dd($data);
         return view('mutasi.index', compact('data'));
         // return view ('mutasi.index',[
         //     'mutasi' => $mutasi
@@ -98,7 +96,7 @@ class MutasiController extends Controller
      */
     public function destroy(Mutasi $mutasi)
     {
-        $mutasi->delete();
+        $mutasi->delete(); 
 
         return redirect()->route('mutasi.index');
     }

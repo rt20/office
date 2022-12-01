@@ -8,13 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Borrow extends Model
 {
-    use HasFactory, softDeletes;
+    use HasFactory;
 
-    protected $guarded = [];
-    protected $casts = [
+   // protected $guarded = [];
+ protected $fillable = [
+        'borrower', 'item_id', 'start','end','agenda','status','is_agree',
+    ];    
+
+protected $casts = [
 		'item' => 'array'
 		
-    ];
+    ]; 
 
     public function item()
 	{

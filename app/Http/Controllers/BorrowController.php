@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Borrow;
 use App\Models\Item;
-use DB;
+
 use Carbon\Carbon;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -114,7 +115,7 @@ class BorrowController extends Controller
     public function destroy(Borrow $borrow)
     {
         $borrow->delete();
-
+ 
         return redirect()->route('borrows.index');
     }
     public function setStatus (Request $request, $id)

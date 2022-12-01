@@ -11,7 +11,11 @@ class Book extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $guarded = [];
+   // protected $guarded = [];
+    protected $fillable = [
+        'pic', 'room', 'agenda','participant','quantity','date_start','time_start','date_end','time_end','meetingid','password','link',
+    ];
+
 
     public function user()
     {

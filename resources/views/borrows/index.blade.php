@@ -79,10 +79,6 @@
                                 @else ($a->status !== '')
                                 <td>{{ date('d M y', strtotime($a->end)) }}</td>
                                 @endif
-
-                              
-
-
                                 <td>
                                 
                                 @if(($a->start > $now)) 
