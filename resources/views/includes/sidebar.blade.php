@@ -8,7 +8,7 @@
            style="opacity: .8">
       <span class="brand-text font-weight-light">e-Office</span>
     </a>
-
+ 
     <!-- Sidebar -->
     <div class="sidebar">
     
@@ -78,9 +78,16 @@
                 Mutasi Barang
               </p>
             </a>
-           
           </li>
           <li class="nav-item has-treeview">
+            <a href="{{ route('qms.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-calendar"></i>
+              <p>
+                QMS SOP
+              </p>
+            </a>
+          </li>
+        <!--   <li class="nav-item has-treeview">
             <a href="{{ route('schedules.index') }}" class="nav-link">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
@@ -88,7 +95,7 @@
               </p>
             </a>
           </li>
-          
+           -->
       </nav>
       <!-- /.sidebar-menu -->
     </div>

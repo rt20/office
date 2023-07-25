@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Mutasi;
-use App\Models\Item;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class MutasiController extends Controller
+use App\Models\Qms;
+use App\Models\User;
+use App\Models\Qmsdetails;
+
+class QmsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,15 +19,21 @@ class MutasiController extends Controller
      */
     public function index()
     {
-        $data = DB::table('items')
-                ->join('mutasis','items.id','=','mutasis.item_id')
-                ->orderBy('tgl_mutasi', 'desc')
-                ->paginate(10);
-                #dd($data);
-        return view('mutasi.index', compact('data'));
-        // return view ('mutasi.index',[
-        //     'mutasi' => $mutasi
-        // ]);
+        $qms = Qms::all();
+        $data = DB::table('qms')
+        ->join('qmsdetails','qms.id','=','qmsdetails.qms_id')
+        ->get();
+// dd($data);
+        $userlogin = Auth::user()->id;
+        $dibaca = DB::table('users')
+                ->join('qmsdetails','users.id','=','qmsdetails.user_id')
+                ->join('qms','qmsdetails.qms_id','=','qms.id')
+                ->where('qmsdetails.user_id','=', $userlogin)
+                ->orderBy('qms.id', 'asc')
+                ->get();
+                // dd($dibaca);
+
+        return view('qms.index', compact('qms','data','dibaca'));
     }
 
     /**
@@ -35,9 +43,7 @@ class MutasiController extends Controller
      */
     public function create()
     {
-        $mutasi = Mutasi::all();
-
-        return view('mutasi.create', compact('mutasi'));
+        //
     }
 
     /**
@@ -48,11 +54,7 @@ class MutasiController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        
-        Mutasi::create($data);
-        #return redirect()->route('mutasi.index');
-        return redirect()->back();
+        //
     }
 
     /**
@@ -61,9 +63,22 @@ class MutasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $qms = Qms::findOrFail($id);
+        $sop = Qms::all();
+       
+        $isRead = 1;
+
+        #insert ke status read ke tabel qms details
+        $user = Auth::user()->id; 
+        $qmsdetail = new Qmsdetails;
+        $qmsdetail -> user_id = $user;
+        $qmsdetail -> qms_id = $id;
+        $qmsdetail -> isRead = $isRead;
+        $qmsdetail->save();
+ 
+        return view('qms.show', compact('qms','sop'));
     }
 
     /**
@@ -95,27 +110,14 @@ class MutasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mutasi $mutasi)
+    public function destroy($id)
     {
-        $mutasi->delete(); 
-
-        return redirect()->route('mutasi.index');
+        //
     }
-    public function addmutasi()
+    public function champ()
     {
-       
-        $items = Item::all();
-        return view('mutasi.addmutasi', [
-            'items' => $items
-        ]);
-        #return view('mutasi.addmutasi', compact('mutasi'));
-    }
-    public function storeAddMutasi (Request $request)
-    { 
-        $data = $request->all();
+        $qms = Qms::all();
         
-        Mutasi::create($data);
-        #return response()->json($data);
-        return redirect()->route('mutasi.index');
+        return view('qms.champ', compact('qms'));
     }
 }

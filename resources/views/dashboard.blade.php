@@ -62,7 +62,7 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                   <div class="small-box bg-success">
                         <div class="inner">
                             <h3>{{ $schedule }}</h3>
 

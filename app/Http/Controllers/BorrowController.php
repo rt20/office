@@ -6,7 +6,7 @@ use App\Models\Borrow;
 use App\Models\Item;
 
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
