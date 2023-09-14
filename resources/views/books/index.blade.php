@@ -176,8 +176,8 @@
                 serverSide: true, //aktifkan server-side
                 ajax: {
                     // url: "{{ URL::route('books.index') }}",
-                    url: "{{ url('/dashboard/books') }}",
-                    // url: "https://peredaranpangan.pom.go.id/eoffice/dashboard/books",
+                    //url: "{{ url('/dashboard/books') }}",
+                    url: "https://peredaranpangan.pom.go.id/eoffice/dashboard/books",
                     type: 'GET',
                     data: {
                         from_date: from_date,
