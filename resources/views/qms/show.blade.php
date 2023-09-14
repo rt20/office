@@ -55,9 +55,6 @@
               </p>
               <hr>
               @endforelse
-
-
-
             </div>
 
             <!-- /.card-body -->

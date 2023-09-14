@@ -32,29 +32,31 @@
               <h3 class="card-title">Standar Operasional Prosedur</h3>
             </div>
             <!-- /.card-header -->
-          
+
             <div class="card-body">
 
-            @forelse($qms as $row)
+            @foreach($judul as $item)
               <p class="text-muted">
-              @if($row->isRead == 1)
-              <i class="fa fa-check-square mr-1""></i>
-              @else($row->isRead == 0)
-              <i class="fa fa-play mr-1""></i>
-              @endif
-              <a href="{{ route('qms.show', $row->id) }}">
-                <span class="tag tag-danger">{{ $row->judul }}</span>
+                <a href="{{ route('qms.index', ['read' => $item->id]) }}" @class([ 'flex gap-x-2 text-sm font-medium' , 'text-blue-600'=> $item->isReadByUser(),
+                  'text-gray-400' => !$item->isReadByUser()
+                  ])
+                  >
+                  <div>
+                    @if ($item->isReadByUser())
+                    <i class="fa fa-check-square mr-1"></i>
+                    @else
+                    <i class="fa fa-play mr-1"></i>
+                    @endif
+                    <span class="tag tag-danger">{{ $item->judul }}</span>
+                  </div>
+
+                </a>
               </p>
-              <hr>
-              @empty
-              <p class="text-muted">
-                <span class="tag tag-danger">Data tidak ditemukan</span>
-              </p>
-              <hr>
-              @endforelse
-              
+
+              @endforeach
+
             </div>
-            
+
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
@@ -63,9 +65,9 @@
         <div class="col-md-9">
           <div class="card">
             <div class="card-header p-2">
-              
+
               <ul class="nav nav-pills float-none ">
-               
+
 
                 <li><a class="btn btn-success" href="#" aria-selected="true"> <strong>Selamat telah menyelesaikan materi SOP Makro</strong></a></li>
 
@@ -76,30 +78,30 @@
                 <div class="active tab-pane" id="activity">
                   <!-- Post -->
                   <div class="post">
-                   
+
                     <!-- /.user-block -->
                     <div class="row mb-3">
-                    <div class="d-flex align-items-center w-100">
-                       <img src="{{ asset('/dist/img/champ.png') }}" class="w-100">
-                       </div>
+                      <div class="d-flex align-items-center w-100">
+                        <img src="{{ asset('/dist/img/champ.png') }}" class="w-100">
+                      </div>
                       <!-- /.col -->
                     </div>
                     <!-- /.row -->
 
-                    
 
-                    
+
+
                   </div>
                   <!-- /.post -->
                 </div>
-              
+
                 <!-- /.tab-pane -->
 
 
               </div>
               <!-- /.tab-content -->
             </div><!-- /.card-body -->
-            
+
           </div>
           <!-- /.card -->
         </div>
@@ -108,7 +110,7 @@
       <!-- /.row -->
     </div><!-- /.container-fluid -->
 
-   
+
   </section>
   <!-- /.content -->
 </div>

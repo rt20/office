@@ -34,37 +34,25 @@
             <!-- /.card-header -->
 
             <div class="card-body">
-            
-            <!-- <p class="text-muted">
-            <i class="fa fa-check-square mr-1 fa-1.5x"></i>
-                <span class="tag tag-danger">data 1</span>
-              </p>
-              <hr>
+              @foreach($judul as $item)
               <p class="text-muted">
-              <i class="fa fa-play fa-1.5x mr-1"></i>
-                <span class="tag tag-danger">data 2</span>
-              </p>
-              <hr> -->
-              @forelse($qms as $row)
-              <p class="text-muted">
-                @foreach($dibaca as $baca)
-                @if($baca->isRead == 1)
-                <i class="fa fa-check-square mr-1 fa-1.5x"></i>
-                @elseif($baca->isRead == 0)
-                <i class="fa fa-play fa-1.5x mr-1"></i>
-                @endif
-                @endforeach
-                <a href="{{ route('qms.show', $row->id) }}">
-                  <span class="tag tag-danger">{{ $row->judul }}</span>
-              </p>
-              <hr>
-              @empty
-              <p class="text-muted">
-                <span class="tag tag-danger">Data tidak ditemukan</span>
-              </p>
-              <hr>
-              @endforelse
+                <a href="{{ route('qms.index', ['read' => $item->id]) }}" @class([ 'flex gap-x-2 text-sm font-medium' , 'text-blue-600'=> $item->isReadByUser(),
+                  'text-gray-400' => !$item->isReadByUser()
+                  ])
+                  >
+                  <div>
+                    @if ($item->isReadByUser())
+                    <i class="fa fa-check-square mr-1"></i>
+                    @else
+                    <i class="fa fa-play mr-1"></i>
+                    @endif
+                    <span class="tag tag-danger">{{ $item->judul }}</span>
+                  </div>
 
+                </a>
+              </p>
+
+              @endforeach
             </div>
 
             <!-- /.card-body -->
@@ -73,13 +61,12 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
+          @if (empty($file))
           <div class="card">
+          
             <div class="card-header p-2">
               <ul class="nav nav-pills float-right">
-
-
-                <li class="nav-item"><a class="btn btn-info" href="{{ route('qms.show', 1) }}" aria-selected="true"> <strong>Mulai Materi </strong></a></li>
-
+                <li class="nav-item"><a class="btn btn-info" href="{{ route('qms.index', ['read' => 1]) }}" aria-selected="true"> <strong>Mulai Materi </strong></a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -90,16 +77,51 @@
 
                     <!-- /.user-block -->
                     <div class="row mb-3">
+
+
                       <div class="d-flex align-items-center w-100">
                         <img src="{{ asset('/dist/img/sop.png') }}" class="w-100">
                       </div>
-                      <!-- /.col -->
+
                     </div>
                     <!-- /.row -->
 
+                  </div>
+                  <!-- /.post -->
+                </div>
+
+                <!-- /.tab-pane -->
 
 
+              </div>
+              <!-- /.tab-content -->
+            </div><!-- /.card-body -->
+           
+          
+          </div>
+          @else
+          <div class="card">
+            <div class="card-header p-2">
+              <ul class="nav nav-pills float-right">
+              </ul>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="active tab-pane" id="activity">
+                  <!-- Post -->
+                  <div class="post">
 
+                    <!-- /.user-block -->
+                    <div class="row mb-3">
+                      <iframe src=" {{ $file }}" width="1000px" height="800px"></iframe>
+                    </div>
+                    <!-- /.row -->
+                    <a class="btn btn-info" href="{{ $file }}" target="_blank"> <strong>Lihat Lebih Jelas</strong></a>
+                    @if($id < 9) 
+                    <a class="btn btn-primary" href="{{ route('qms.index', ['read' => $id+1]) }}" aria-selected="true"> <strong>Selanjutnya</strong></a>
+                      @elseif ( $id > 8)
+                      <a class="btn btn-success" href="{{ route('qms.champ') }}" aria-selected="true"> <strong>Selesai Materi </strong></a>
+                      @endif
                   </div>
                   <!-- /.post -->
                 </div>
@@ -112,6 +134,7 @@
             </div><!-- /.card-body -->
 
           </div>
+          @endif
           <!-- /.card -->
         </div>
         <!-- /.col -->

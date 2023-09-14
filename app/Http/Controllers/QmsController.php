@@ -8,32 +8,28 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Qms;
 use App\Models\User;
-use App\Models\Qmsdetails;
 
 class QmsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct(
+        protected Qms $qms
+    ){}
+    public function index(Request $request)
     {
-        $qms = Qms::all();
-        $data = DB::table('qms')
-        ->join('qmsdetails','qms.id','=','qmsdetails.qms_id')
-        ->get();
-// dd($data);
-        $userlogin = Auth::user()->id;
-        $dibaca = DB::table('users')
-                ->join('qmsdetails','users.id','=','qmsdetails.user_id')
-                ->join('qms','qmsdetails.qms_id','=','qms.id')
-                ->where('qmsdetails.user_id','=', $userlogin)
-                ->orderBy('qms.id', 'asc')
-                ->get();
-                // dd($dibaca);
+        $read = $request->get('read');
+        $getContent = $this->qms->find($read);
+        
+        if ($getContent && !$this->user()->alreadyRead($getContent->id)) {
+            auth()->user()->qms()->attach($getContent->id);
+        }
+        
+        return view('qms.index', [
+            'judul' => $this->getAllTitle(),
+            'file' => optional($getContent)->file,
+            'id' => optional($getContent)->id
+        ]);
 
-        return view('qms.index', compact('qms','data','dibaca'));
+       
     }
 
     /**
@@ -114,10 +110,28 @@ class QmsController extends Controller
     {
         //
     }
-    public function champ()
+    public function champ(Request $request)
     {
-        $qms = Qms::all();
+        $read = $request->get('read');
+        $getContent = $this->qms->find($read);
         
-        return view('qms.champ', compact('qms'));
+        if ($getContent && !$this->user()->alreadyRead($getContent->id)) {
+            auth()->user()->qms()->attach($getContent->id);
+        }
+        
+        return view('qms.champ', [
+            'judul' => $this->getAllTitle(),
+            'file' => optional($getContent)->file,
+            'id' => optional($getContent)->id
+        ]);
+    }
+    private function getAllTitle()
+    {
+        return $this->qms->newQuery()->get(['id', 'judul']);
+    }
+
+    private function user()
+    {
+        return auth()->user();
     }
 }

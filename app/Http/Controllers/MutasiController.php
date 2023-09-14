@@ -23,9 +23,7 @@ class MutasiController extends Controller
                 ->paginate(10);
                 #dd($data);
         return view('mutasi.index', compact('data'));
-        // return view ('mutasi.index',[
-        //     'mutasi' => $mutasi
-        // ]);
+       
     }
 
     /**

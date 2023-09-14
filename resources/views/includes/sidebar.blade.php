@@ -25,7 +25,7 @@
                 Dashboard
               </p>
             </a>
-          </li>
+          </li> 
           @if(Auth::user()->roles == 'ADMIN')
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -48,6 +48,14 @@
                 <a href="{{ route('items.index') }}" class="nav-link">
                   <i class="fa fa-archive nav-icon"></i>
                   <p>BMN</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('report.index') }}" class="nav-link">
+                  <i class="fa fa-file nav-icon"></i>
+                  <p>Laporan</p>
                 </a>
               </li>
             </ul>

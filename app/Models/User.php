@@ -59,4 +59,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function qms()
+    {
+        return $this->belongsToMany(Qms::class);
+    }
+
+    public function alreadyRead($qmsId)
+    {
+        return $this->qms->contains($qmsId);
+    }
 }
