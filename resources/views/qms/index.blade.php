@@ -117,9 +117,9 @@
                     </div>
                     <!-- /.row -->
                     <a class="btn btn-info" href="{{ $file }}" target="_blank"> <strong>Lihat Lebih Jelas</strong></a>
-                    @if($id < 9) 
+                    @if($id < 23) 
                     <a class="btn btn-primary" href="{{ route('qms.index', ['read' => $id+1]) }}" aria-selected="true"> <strong>Selanjutnya</strong></a>
-                      @elseif ( $id > 8)
+                      @elseif ( $id > 22)
                       <a class="btn btn-success" href="{{ route('qms.champ') }}" aria-selected="true"> <strong>Selesai Materi </strong></a>
                       @endif
                   </div>

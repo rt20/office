@@ -69,7 +69,7 @@
               <ul class="nav nav-pills float-none ">
 
 
-                <li><a class="btn btn-success" href="#" aria-selected="true"> <strong>Selamat telah menyelesaikan materi SOP Makro</strong></a></li>
+                <li><a class="btn btn-success" href="#" aria-selected="true"> <strong>Selamat telah menyelesaikan materi SOP</strong></a></li>
 
               </ul>
             </div><!-- /.card-header -->

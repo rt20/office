@@ -86,7 +86,7 @@
                     <a class="btn btn-info" href="{{ $qms->file }}" target="_blank"> <strong>Lihat Lebih Jelas </strong></a>
                     @if($qms->id+1 < 10) <!-- <input value="1" name="isRead" type="text"> -->
                       <a class="btn btn-primary" href="{{ route('qms.show', $qms->id+1) }}" aria-selected="true"> <strong>Selesai & Lanjut Materi </strong></a>
-                      @elseif ($qms->id+1 == 10)
+                      @elseif ($qms->id+1 == 23)
                       <a class="btn btn-success" href="{{ route('qms.champ') }}" aria-selected="true"> <strong>Selesai Materi </strong></a>
                       @endif
                   </div>
