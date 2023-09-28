@@ -34,6 +34,7 @@ Route::prefix('/dashboard')
         Route::resource('/mutasi', MutasiController::class);
         Route::resource('/qms', QmsController::class);
         Route::get('/champ', 'App\Http\Controllers\QmsController@champ')->name('qms.champ');
+        Route::get('/mikro', 'App\Http\Controllers\QmsController@mikro')->name('qms.mikro');
         Route::get('/addmutasi', 'App\Http\Controllers\MutasiController@addmutasi')->name('mutasi.addmutasi');
         Route::post('/storeAddMutasi', 'MutasiController@storeAddMutasi')->name('mutasi.storeAddMutasi');
         

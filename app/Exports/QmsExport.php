@@ -15,7 +15,7 @@ class QmsExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         // TODO: Implement headings() method.
-
+ 
         return [
             "Nama",
             "Email",

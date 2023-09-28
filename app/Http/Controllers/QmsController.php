@@ -134,4 +134,21 @@ class QmsController extends Controller
     {
         return auth()->user();
     }
+    public function mikro(Request $request)
+    {
+        $read = $request->get('read');
+        $getContent = $this->qms->find($read);
+        
+        if ($getContent && !$this->user()->alreadyRead($getContent->id)) {
+            auth()->user()->qms()->attach($getContent->id);
+        }
+        
+        return view('qms.mikro', [
+            'judul' => $this->getAllTitle(),
+            'file' => optional($getContent)->file,
+            'id' => optional($getContent)->id
+        ]);
+
+       
+    }
 }

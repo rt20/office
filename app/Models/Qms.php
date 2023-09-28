@@ -18,7 +18,7 @@ class Qms extends Model
         return $this->belongsToMany(User::class);
     }
     public function isReadByUser()
-    {
+    { 
         return $this->users
             ->pluck('id')
             ->contains(auth()->user()->id);
