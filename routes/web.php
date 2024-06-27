@@ -9,6 +9,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\MutasiController;
 use App\Http\Controllers\QmsController;
+use App\Http\Controllers\MakroController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 
@@ -33,8 +34,11 @@ Route::prefix('/dashboard')
         Route::resource('/schedules', ScheduleController::class);
         Route::resource('/mutasi', MutasiController::class);
         Route::resource('/qms', QmsController::class);
+        Route::resource('/makro', MakroController::class);
         Route::get('/champ', 'App\Http\Controllers\QmsController@champ')->name('qms.champ');
         Route::get('/mikro', 'App\Http\Controllers\QmsController@mikro')->name('qms.mikro');
+        Route::get('/champ', 'App\Http\Controllers\MakroController@champ')->name('makro.champ');
+        Route::get('/makro', 'App\Http\Controllers\MakroController@mikro')->name('makro.mikro');
         Route::get('/addmutasi', 'App\Http\Controllers\MutasiController@addmutasi')->name('mutasi.addmutasi');
         Route::post('/storeAddMutasi', 'MutasiController@storeAddMutasi')->name('mutasi.storeAddMutasi');
         

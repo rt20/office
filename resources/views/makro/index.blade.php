@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Standar Operasional Prosedur')
+@section('title','Standar Operasional Prosedur - Makro')
 
 @section('content')
 <div class="content-wrapper">
@@ -29,14 +29,14 @@
           <!-- Standar operasional prosedur -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">SOP MIKRO</h3>
+              <h3 class="card-title">SOP MAKRO</h3>
             </div>
             <!-- /.card-header -->
  
             <div class="card-body">
               @foreach($judul as $item)
               <p class="text-muted">
-                <a href="{{ route('qms.index', ['read' => $item->id]) }}" @class([ 'flex gap-x-2 text-sm font-medium' , 'text-blue-600'=> $item->isReadByUser(),
+                <a href="{{ route('makro.index', ['read' => $item->id]) }}" @class([ 'flex gap-x-2 text-sm font-medium' , 'text-blue-600'=> $item->isReadByUser(),
                   'text-gray-400' => !$item->isReadByUser()
                   ])
                   >
@@ -66,7 +66,7 @@
           
             <div class="card-header p-2">
               <ul class="nav nav-pills float-right">
-                <li class="nav-item"><a class="btn btn-info" href="{{ route('qms.index', ['read' => 1]) }}" aria-selected="true"> <strong>Mulai Materi </strong></a></li>
+                <li class="nav-item"><a class="btn btn-info" href="{{ route('makro.index', ['read' => 1]) }}" aria-selected="true"> <strong>Mulai Materi </strong></a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -117,10 +117,10 @@
                     </div>
                     <!-- /.row -->
                     <a class="btn btn-info" href="{{ $file }}" target="_blank"> <strong>Lihat Lebih Jelas</strong></a>
-                    @if($id < 23) 
-                    <a class="btn btn-primary" href="{{ route('qms.index', ['read' => $id+1]) }}" aria-selected="true"> <strong>Selanjutnya</strong></a>
-                      @elseif ( $id > 22)
-                      <a class="btn btn-success" href="{{ route('qms.champ') }}" aria-selected="true"> <strong>Selesai Materi </strong></a>
+                    @if($id < 20) 
+                    <a class="btn btn-primary" href="{{ route('makro.index', ['read' => $id+1]) }}" aria-selected="true"> <strong>Selanjutnya</strong></a>
+                      @elseif ( $id > 19)
+                      <a class="btn btn-success" href="{{ route('makro.champ') }}" aria-selected="true"> <strong>Selesai Materi </strong></a>
                       @endif
                   </div>
                   <!-- /.post -->

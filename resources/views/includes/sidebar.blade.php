@@ -95,22 +95,22 @@
 
             <ul class="nav nav-treeview">
               <li class="nav-item has-treeview">
-                <a href="{{ route('qms.index') }}" class="nav-link">
+                <a href="{{ route('makro.index') }}" class="nav-link">
                   <i class="nav-icon fas fa-circle"></i>
                   <p>
-                    SOP
+                    SOP Makro
                   </p>
                 </a>
             </ul>
-            <!-- <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview">
               <li class="nav-item has-treeview">
-                <a href="{{ route('qms.mikro') }}" class="nav-link">
+                <a href="{{ route('qms.index') }}" class="nav-link">
                   <i class="nav-icon fas fa-circle"></i>
                   <p>
                     SOP Mikro
                   </p>
                 </a>
-            </ul> -->
+            </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item has-treeview">
                 <a href="https://s.id/tesmocoyuk" class="nav-link" target="_blank">

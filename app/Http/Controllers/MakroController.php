@@ -6,24 +6,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Qms;
+use App\Models\Makro;
 use App\Models\User;
 
-class QmsController extends Controller
+class MakroController extends Controller
 {
     public function __construct(
-        protected Qms $qms
+        protected Makro $makro
     ){}
     public function index(Request $request)
     {
         $read = $request->get('read');
-        $getContent = $this->qms->find($read);
-       # dd($getContent);
+        $getContent = $this->makro->find($read);
+       
         if ($getContent && !$this->user()->alreadyRead($getContent->id)) {
-            auth()->user()->qms()->attach($getContent->id)->orderBy('id', 'DESC');
+            auth()->user()->makro()->attach($getContent->id)->orderBy('id', 'DESC');
         }
-        
-        return view('qms.index', [
+        //  dd($getContent);
+        return view('makro.index', [
             'judul' => $this->getAllTitle(),
             'file' => optional($getContent)->file,
             'id' => optional($getContent)->id
@@ -61,20 +61,21 @@ class QmsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $qms = Qms::findOrFail($id);
-        $sop = Qms::all();
+        $makro = Makro::findOrFail($id);
+        $sop = Makro::all();
        
         $isRead = 1;
 
         #insert ke status read ke tabel qms details
         $user = Auth::user()->id; 
-        $qmsdetail = new Qmsdetails;
-        $qmsdetail -> user_id = $user;
-        $qmsdetail -> qms_id = $id;
-        $qmsdetail -> isRead = $isRead;
-        $qmsdetail->save();
+        $makrodetail = new Makrodetails;
+        $makrodetail -> user_id = $user;
+        $makrodetail -> makro_id = $id;
+        $makrodetail -> isRead = $isRead;
+        
+        $makrodetail->save();
  
-        return view('qms.show', compact('qms','sop'));
+        return view('makro.show', compact('makro','sop'));
     }
 
     /**
@@ -113,13 +114,13 @@ class QmsController extends Controller
     public function champ(Request $request)
     {
         $read = $request->get('read');
-        $getContent = $this->qms->find($read);
+        $getContent = $this->makro->find($read);
         
         if ($getContent && !$this->user()->alreadyRead($getContent->id)) {
-            auth()->user()->qms()->attach($getContent->id);
+            auth()->user()->makro()->attach($getContent->id);
         }
         
-        return view('qms.champ', [
+        return view('makro.champ', [
             'judul' => $this->getAllTitle(),
             'file' => optional($getContent)->file,
             'id' => optional($getContent)->id
@@ -127,23 +128,23 @@ class QmsController extends Controller
     }
     private function getAllTitle()
     {
-        return $this->qms->newQuery()->get(['id', 'judul']);
+        return $this->makro->newQuery()->get(['id', 'judul']);
     }
 
     private function user()
     {
         return auth()->user();
     }
-    public function mikro(Request $request)
+    public function makro(Request $request)
     {
         $read = $request->get('read');
-        $getContent = $this->qms->find($read);
+        $getContent = $this->makro->find($read);
         
         if ($getContent && !$this->user()->alreadyRead($getContent->id)) {
-            auth()->user()->qms()->attach($getContent->id);
+            auth()->user()->makro()->attach($getContent->id);
         }
         
-        return view('qms.mikro', [
+        return view('makro.akro', [
             'judul' => $this->getAllTitle(),
             'file' => optional($getContent)->file,
             'id' => optional($getContent)->id

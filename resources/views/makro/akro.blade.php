@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Standar Operasional Prosedur')
+@section('title','SOP MIKRO')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,7 +9,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Sistem Manajemen Mutu</h1>
+          <h1>SOP MIKRO</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -29,14 +29,14 @@
           <!-- Standar operasional prosedur -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">SOP MIKRO</h3>
+              <h3 class="card-title">Standar Operasional Prosedur</h3>
             </div>
             <!-- /.card-header -->
- 
+
             <div class="card-body">
               @foreach($judul as $item)
               <p class="text-muted">
-                <a href="{{ route('qms.index', ['read' => $item->id]) }}" @class([ 'flex gap-x-2 text-sm font-medium' , 'text-blue-600'=> $item->isReadByUser(),
+                <a href="{{ route('qms.mikro', ['read' => $item->id]) }}" @class([ 'flex gap-x-2 text-sm font-medium' , 'text-blue-600'=> $item->isReadByUser(),
                   'text-gray-400' => !$item->isReadByUser()
                   ])
                   >

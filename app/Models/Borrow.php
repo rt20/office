@@ -12,7 +12,7 @@ class Borrow extends Model
 
    // protected $guarded = [];
  protected $fillable = [
-        'borrower', 'item_id', 'start','end','agenda','status','is_agree',
+        'borrower', 'item_id', 'start','end','agenda','status','is_agree','bensin_start','bensin_end',
     ];    
 
 protected $casts = [

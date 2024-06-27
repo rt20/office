@@ -38,9 +38,6 @@ class BorrowController extends Controller
     public function create()
     {
         
-        // menampilkan barang yang tersedia
-        // $items = DB::select('SELECT * from items WHERE id NOT IN (SELECT item_id from borrows where status ="DIPINJAM")');
-                // ->all();
         $items = Item::all();
 
         return view('borrows.create', [
@@ -57,7 +54,14 @@ class BorrowController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
+
+        $data['bensin_start'] = $request->file('bensin_start')->store(
+            'assets/bensin','public'
+        );
+        $data['bensin_end'] = $request->file('bensin_end')->store(
+            'assets/bensin','public'
+        );
+        // dd($data);
         Borrow::create($data);
 
         return redirect()->route('borrows.index');
